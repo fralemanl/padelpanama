@@ -429,6 +429,18 @@ export default function ComparePage() {
         </div>
         <div
           style={{
+            textAlign: "center",
+            marginBottom: "0.9rem",
+            color: "rgb(51, 65, 85)",
+            fontWeight: "600",
+            fontSize: "0.95rem",
+          }}
+        >
+          Escoge dos jugadores y calcula la categoría minima de la pareja.
+        </div>
+
+        <div
+          style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -494,7 +506,7 @@ export default function ComparePage() {
                       fontWeight: "700",
                     }}
                   >
-                    NOMBRE
+                    JUGADOR 1
                   </div>
                   <div
                     style={{
@@ -584,7 +596,7 @@ export default function ComparePage() {
                       fontWeight: "700",
                     }}
                   >
-                    NOMBRE
+                    JUGADOR 2
                   </div>
                   <div
                     style={{
