@@ -361,10 +361,6 @@ export default function PlayerPageClient() {
   const partidos = player.MATCHES || 0;
   const ganados = player.WINS || 0;
   const efectividad = player.EFFECTIVENESS || 0;
-  const historicStats = player.HISTORIC_STATS || [];
-  const hasHistoricStats = historicStats.some((stat) =>
-    String(stat.value || "").trim(),
-  );
   const verified =
     String(player.VERIFIED || "").toLowerCase() === "true" ||
     String(player.VERIFIED || "").toLowerCase() === "1" ||
@@ -860,79 +856,7 @@ export default function PlayerPageClient() {
           <PlayerRadar player={player} />
         </div>
 
-        {/* Histórico */}
-        <div
-          style={{
-            backgroundColor: "white",
-            borderRadius: "1.5rem",
-            padding: "2rem",
-            boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-            marginBottom: "2rem",
-            animation: "slideUp 0.5s ease-out 0.65s both",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "bold",
-              color: "rgb(15, 23, 42)",
-              marginBottom: "1.5rem",
-              textAlign: "center",
-            }}
-          >
-            Histórico
-          </h2>
-          {hasHistoricStats ? (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-                gap: "1.5rem",
-                textAlign: "center",
-                justifyItems: "center",
-                backgroundColor: "rgb(248, 250, 252)",
-                borderRadius: "1rem",
-                padding: "1.5rem",
-                border: "1px solid rgb(226, 232, 240)",
-              }}
-            >
-              {historicStats.map((stat) => (
-                <div key={stat.stat}>
-                  <p
-                    style={{
-                      margin: 0,
-                      color: "rgb(100, 116, 139)",
-                      fontSize: "0.85rem",
-                    }}
-                  >
-                    {stat.stat}
-                  </p>
-                  <p
-                    style={{
-                      margin: 0,
-                      fontSize: "1.7rem",
-                      fontWeight: "700",
-                    }}
-                  >
-                    {stat.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p
-              style={{
-                margin: 0,
-                textAlign: "center",
-                color: "rgb(100, 116, 139)",
-              }}
-            >
-              Sin datos históricos
-            </p>
-          )}
-        </div>
-
-        {/* Resultados */}
+        {/* Resultados históricos */}
         <div
           style={{
             backgroundColor: "white",
@@ -950,7 +874,7 @@ export default function PlayerPageClient() {
               marginBottom: "1.5rem",
             }}
           >
-            🏆 Resultados
+            🏆 Resultados históricos
           </h2>
 
           {filteredGames.length === 0 ? (
