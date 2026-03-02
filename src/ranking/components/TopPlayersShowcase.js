@@ -188,7 +188,8 @@ export default function TopPlayersShowcase({players, gender, category}) {
               <button
                 onClick={() =>
                   setCurrentIndex(
-                    (prev) => (prev - 1 + topPlayers.length) % topPlayers.length,
+                    (prev) =>
+                      (prev - 1 + topPlayers.length) % topPlayers.length,
                   )
                 }
                 style={{
@@ -209,7 +210,8 @@ export default function TopPlayersShowcase({players, gender, category}) {
                   zIndex: 10,
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+                  e.currentTarget.style.transform =
+                    "translateY(-50%) scale(1.1)";
                   e.currentTarget.style.boxShadow = `0 8px 16px -2px ${medalColor}`;
                 }}
                 onMouseOut={(e) => {
@@ -242,7 +244,8 @@ export default function TopPlayersShowcase({players, gender, category}) {
                   zIndex: 10,
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+                  e.currentTarget.style.transform =
+                    "translateY(-50%) scale(1.1)";
                   e.currentTarget.style.boxShadow = `0 8px 16px -2px ${medalColor}`;
                 }}
                 onMouseOut={(e) => {

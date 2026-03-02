@@ -376,13 +376,13 @@ export default function ComparePage() {
               letterSpacing: "0.02em",
             }}
           >
-            Calcula tu categoría
+            Category Matchmaker
           </h1>
           <div
             style={{
               width: "120px",
               height: "4px",
-              borderRadius: "999px",
+              borderRadius: "9px",
               backgroundColor: "rgb(6, 182, 212)",
               margin: "0.75rem auto 0",
             }}
@@ -402,7 +402,7 @@ export default function ComparePage() {
               style={{
                 padding: "0.5rem 1rem",
                 backgroundColor: "rgb(15, 23, 42)",
-                borderRadius: "999px",
+                borderRadius: "9px",
                 border: "1px solid rgb(15, 23, 42)",
                 color: "white",
                 fontWeight: "600",
@@ -416,7 +416,7 @@ export default function ComparePage() {
               style={{
                 padding: "0.5rem 1rem",
                 backgroundColor: "white",
-                borderRadius: "999px",
+                borderRadius: "9px",
                 border: "1px solid #cfcfcf",
                 color: "#0f172a",
                 fontWeight: "600",

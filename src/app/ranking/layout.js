@@ -113,11 +113,11 @@ export default function RootLayout({children}) {
             strategy="afterInteractive"
           />
 
-        {/* Footer removed as requested */}
-        {/* All content ends here, close all divs properly */}
+          {/* Footer removed as requested */}
+          {/* All content ends here, close all divs properly */}
         </div>
       </div>
     </div>
   );
-// ...existing code...
+  // ...existing code...
 }

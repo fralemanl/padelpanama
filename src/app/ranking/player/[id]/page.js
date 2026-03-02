@@ -888,356 +888,431 @@ export default function PlayerPageClient() {
                 Sin resultados registrados para este jugador
               </p>
             </div>
-          ) : (
-            isMobile ? (
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr",
-                  gap: "0.9rem",
-                }}
-              >
-                {filteredGames.map((r, idx) => {
-                  const eventDate =
-                    r.DATE ||
-                    r.Date ||
-                    r.date ||
-                    r.FECHA ||
-                    r.Fecha ||
-                    r.fecha ||
-                    "-";
-                  const eventName =
-                    r.TOURNAMENT ||
-                    r.Tournament ||
-                    r.tournament ||
-                    r.TORNEO ||
-                    r.Torneo ||
-                    r.torneo ||
-                    r.TOURNAMENT_NAME ||
-                    r.NAME ||
-                    "-";
-                  const eventCategory =
-                    r.CATEGORY ||
-                    r.Category ||
-                    r.category ||
-                    r.CATEGORIA ||
-                    r.Categoria ||
-                    r.categoria ||
-                    "-";
-                  const eventCouple =
-                    r.COUPLE_NAME ||
-                    r.Couple_Name ||
-                    r.couple_name ||
-                    r.PARTNER ||
-                    r.Partner ||
-                    r.partner ||
-                    r.PAREJA ||
-                    r.Pareja ||
-                    r.pareja ||
-                    r.PARTNER_NAME ||
-                    "-";
-                  const eventPosition =
-                    r.POSITION ||
-                    r.Position ||
-                    r.position ||
-                    r.POSICION ||
-                    r.Posicion ||
-                    r.posicion ||
-                    "-";
-                  const eventPoints =
-                    r.POINTS ||
-                    r.Points ||
-                    r.points ||
-                    r.PUNTOS ||
-                    r.Puntos ||
-                    r.puntos ||
-                    "-";
+          ) : isMobile ? (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr",
+                gap: "0.9rem",
+              }}
+            >
+              {filteredGames.map((r, idx) => {
+                const eventDate =
+                  r.DATE ||
+                  r.Date ||
+                  r.date ||
+                  r.FECHA ||
+                  r.Fecha ||
+                  r.fecha ||
+                  "-";
+                const eventName =
+                  r.TOURNAMENT ||
+                  r.Tournament ||
+                  r.tournament ||
+                  r.TORNEO ||
+                  r.Torneo ||
+                  r.torneo ||
+                  r.TOURNAMENT_NAME ||
+                  r.NAME ||
+                  "-";
+                const eventCategory =
+                  r.CATEGORY ||
+                  r.Category ||
+                  r.category ||
+                  r.CATEGORIA ||
+                  r.Categoria ||
+                  r.categoria ||
+                  "-";
+                const eventCouple =
+                  r.COUPLE_NAME ||
+                  r.Couple_Name ||
+                  r.couple_name ||
+                  r.PARTNER ||
+                  r.Partner ||
+                  r.partner ||
+                  r.PAREJA ||
+                  r.Pareja ||
+                  r.pareja ||
+                  r.PARTNER_NAME ||
+                  "-";
+                const eventPosition =
+                  r.POSITION ||
+                  r.Position ||
+                  r.position ||
+                  r.POSICION ||
+                  r.Posicion ||
+                  r.posicion ||
+                  "-";
+                const eventPoints =
+                  r.POINTS ||
+                  r.Points ||
+                  r.points ||
+                  r.PUNTOS ||
+                  r.Puntos ||
+                  r.puntos ||
+                  "-";
 
-                  return (
-                    <article
-                      key={idx}
+                return (
+                  <article
+                    key={idx}
+                    style={{
+                      background:
+                        "linear-gradient(180deg, rgb(255, 255, 255), rgb(248, 250, 252))",
+                      border: "1px solid rgb(203, 213, 225)",
+                      borderRadius: "1rem",
+                      padding: "0.85rem",
+                      boxShadow: "0 8px 18px rgba(15, 23, 42, 0.08)",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "0.7rem",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
                       style={{
-                        background:
-                          "linear-gradient(180deg, rgb(255, 255, 255), rgb(248, 250, 252))",
-                        border: "1px solid rgb(203, 213, 225)",
-                        borderRadius: "1rem",
-                        padding: "0.85rem",
-                        boxShadow: "0 8px 18px rgba(15, 23, 42, 0.08)",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.7rem",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <div
-                        style={{
-                          height: "4px",
-                          borderRadius: "9999px",
-                          background:
-                            "linear-gradient(to right, rgb(6, 182, 212), rgb(139, 92, 246))",
-                          margin: "-0.85rem -0.85rem 0",
-                        }}
-                      />
-
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          gap: "0.5rem",
-                          flexWrap: "wrap",
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontSize: "0.7rem",
-                            color: "rgb(71, 85, 105)",
-                            fontWeight: "700",
-                            letterSpacing: "0.01em",
-                          }}
-                        >
-                          📅 {eventDate}
-                        </span>
-                        <span
-                          style={{
-                            backgroundColor: "rgb(165, 243, 252)",
-                            color: "rgb(8, 145, 178)",
-                            borderRadius: "9999px",
-                            padding: "0.22rem 0.58rem",
-                            fontSize: "0.68rem",
-                            fontWeight: "700",
-                            maxWidth: "100%",
-                            whiteSpace: "normal",
-                            overflowWrap: "anywhere",
-                          }}
-                        >
-                          {eventCategory}
-                        </span>
-                      </div>
-
-                      <h3
-                        style={{
-                          margin: 0,
-                          fontSize: "0.89rem",
-                          color: "rgb(15, 23, 42)",
-                          lineHeight: 1.3,
-                          whiteSpace: "normal",
-                          overflowWrap: "anywhere",
-                        }}
-                      >
-                        🏅 {eventName}
-                      </h3>
-
-                      <p
-                        style={{
-                          margin: 0,
-                          fontSize: "0.79rem",
-                          color: "rgb(51, 65, 85)",
-                          lineHeight: 1.3,
-                          whiteSpace: "normal",
-                          overflowWrap: "anywhere",
-                        }}
-                      >
-                        👥 Pareja: {eventCouple}
-                      </p>
-
-                      <div
-                        style={{
-                          display: "grid",
-                          gridTemplateColumns: "1fr 1fr",
-                          gap: "0.5rem",
-                        }}
-                      >
-                        <div
-                          style={{
-                            backgroundColor: "rgb(255, 247, 237)",
-                            border: "1px solid rgb(254, 215, 170)",
-                            borderRadius: "0.8rem",
-                            padding: "0.45rem 0.5rem",
-                            textAlign: "center",
-                          }}
-                        >
-                          <p
-                            style={{
-                              margin: 0,
-                              fontSize: "0.64rem",
-                              color: "rgb(154, 52, 18)",
-                              fontWeight: "700",
-                            }}
-                          >
-                            🥇 Posición
-                          </p>
-                          <p
-                            style={{
-                              margin: 0,
-                              fontSize: "0.9rem",
-                              color: "rgb(194, 65, 12)",
-                              fontWeight: "800",
-                            }}
-                          >
-                            {eventPosition}
-                          </p>
-                        </div>
-
-                        <div
-                          style={{
-                            backgroundColor: "rgb(245, 243, 255)",
-                            border: "1px solid rgb(221, 214, 254)",
-                            borderRadius: "0.8rem",
-                            padding: "0.45rem 0.5rem",
-                            textAlign: "center",
-                          }}
-                        >
-                          <p
-                            style={{
-                              margin: 0,
-                              fontSize: "0.64rem",
-                              color: "rgb(91, 33, 182)",
-                              fontWeight: "700",
-                            }}
-                          >
-                            ⭐ Puntos
-                          </p>
-                          <p
-                            style={{
-                              margin: 0,
-                              fontSize: "0.9rem",
-                              color: "rgb(109, 40, 217)",
-                              fontWeight: "800",
-                            }}
-                          >
-                            +{eventPoints}
-                          </p>
-                        </div>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            ) : (
-              <div style={{overflowX: "auto"}}>
-                <table
-                  style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  <thead>
-                    <tr
-                      style={{
+                        height: "4px",
+                        borderRadius: "9999px",
                         background:
                           "linear-gradient(to right, rgb(6, 182, 212), rgb(139, 92, 246))",
-                        color: "white",
-                        borderBottom: "3px solid rgb(8, 145, 178)",
+                        margin: "-0.85rem -0.85rem 0",
+                      }}
+                    />
+
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: "0.5rem",
+                        flexWrap: "wrap",
                       }}
                     >
-                      <th style={{padding: "0.8rem", textAlign: "left", fontWeight: "600"}}>📅 Fecha</th>
-                      <th style={{padding: "0.8rem", textAlign: "left", fontWeight: "600"}}>🏅 Torneo</th>
-                      <th style={{padding: "0.8rem", textAlign: "left", fontWeight: "600"}}>📂 Categoría</th>
-                      <th style={{padding: "0.8rem", textAlign: "left", fontWeight: "600"}}>👥 Pareja</th>
-                      <th style={{padding: "0.8rem", textAlign: "center", fontWeight: "600"}}>🥇 Posición</th>
-                      <th style={{padding: "0.8rem", textAlign: "center", fontWeight: "600"}}>⭐ Puntos</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredGames.map((r, idx) => {
-                      const eventDate =
-                        r.DATE ||
-                        r.Date ||
-                        r.date ||
-                        r.FECHA ||
-                        r.Fecha ||
-                        r.fecha ||
-                        "-";
-                      const eventName =
-                        r.TOURNAMENT ||
-                        r.Tournament ||
-                        r.tournament ||
-                        r.TORNEO ||
-                        r.Torneo ||
-                        r.torneo ||
-                        r.TOURNAMENT_NAME ||
-                        r.NAME ||
-                        "-";
-                      const eventCategory =
-                        r.CATEGORY ||
-                        r.Category ||
-                        r.category ||
-                        r.CATEGORIA ||
-                        r.Categoria ||
-                        r.categoria ||
-                        "-";
-                      const eventCouple =
-                        r.COUPLE_NAME ||
-                        r.Couple_Name ||
-                        r.couple_name ||
-                        r.PARTNER ||
-                        r.Partner ||
-                        r.partner ||
-                        r.PAREJA ||
-                        r.Pareja ||
-                        r.pareja ||
-                        r.PARTNER_NAME ||
-                        "-";
-                      const eventPosition =
-                        r.POSITION ||
-                        r.Position ||
-                        r.position ||
-                        r.POSICION ||
-                        r.Posicion ||
-                        r.posicion ||
-                        "-";
-                      const eventPoints =
-                        r.POINTS ||
-                        r.Points ||
-                        r.points ||
-                        r.PUNTOS ||
-                        r.Puntos ||
-                        r.puntos ||
-                        "-";
+                      <span
+                        style={{
+                          fontSize: "0.7rem",
+                          color: "rgb(71, 85, 105)",
+                          fontWeight: "700",
+                          letterSpacing: "0.01em",
+                        }}
+                      >
+                        📅 {eventDate}
+                      </span>
+                      <span
+                        style={{
+                          backgroundColor: "rgb(165, 243, 252)",
+                          color: "rgb(8, 145, 178)",
+                          borderRadius: "9999px",
+                          padding: "0.22rem 0.58rem",
+                          fontSize: "0.68rem",
+                          fontWeight: "700",
+                          maxWidth: "100%",
+                          whiteSpace: "normal",
+                          overflowWrap: "anywhere",
+                        }}
+                      >
+                        {eventCategory}
+                      </span>
+                    </div>
 
-                      return (
-                        <tr
-                          key={idx}
+                    <h3
+                      style={{
+                        margin: 0,
+                        fontSize: "0.89rem",
+                        color: "rgb(15, 23, 42)",
+                        lineHeight: 1.3,
+                        whiteSpace: "normal",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
+                      🏅 {eventName}
+                    </h3>
+
+                    <p
+                      style={{
+                        margin: 0,
+                        fontSize: "0.79rem",
+                        color: "rgb(51, 65, 85)",
+                        lineHeight: 1.3,
+                        whiteSpace: "normal",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
+                      👥 Pareja: {eventCouple}
+                    </p>
+
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <div
+                        style={{
+                          backgroundColor: "rgb(255, 247, 237)",
+                          border: "1px solid rgb(254, 215, 170)",
+                          borderRadius: "0.8rem",
+                          padding: "0.45rem 0.5rem",
+                          textAlign: "center",
+                        }}
+                      >
+                        <p
                           style={{
-                            borderBottom: "1px solid rgb(226, 232, 240)",
-                            transition: "background-color 0.2s ease-in-out",
+                            margin: 0,
+                            fontSize: "0.64rem",
+                            color: "rgb(154, 52, 18)",
+                            fontWeight: "700",
                           }}
-                          onMouseOver={(e) =>
-                            (e.currentTarget.style.backgroundColor =
-                              "rgb(241, 245, 249)")
-                          }
-                          onMouseOut={(e) =>
-                            (e.currentTarget.style.backgroundColor = "transparent")
-                          }
                         >
-                          <td style={{padding: "0.75rem 0.8rem"}}>{eventDate}</td>
-                          <td style={{padding: "0.75rem 0.8rem", fontWeight: "600", color: "rgb(15, 23, 42)"}}>{eventName}</td>
-                          <td style={{padding: "0.75rem 0.8rem"}}>
-                            <span
-                              style={{
-                                backgroundColor: "rgb(165, 243, 252)",
-                                color: "rgb(8, 145, 178)",
-                                padding: "0.2rem 0.55rem",
-                                borderRadius: "9999px",
-                                fontSize: "0.78rem",
-                                fontWeight: "600",
-                              }}
-                            >
-                              {eventCategory}
-                            </span>
-                          </td>
-                          <td style={{padding: "0.75rem 0.8rem"}}>{eventCouple}</td>
-                          <td style={{padding: "0.75rem 0.8rem", textAlign: "center", fontWeight: "700", color: "rgb(194, 65, 12)"}}>{eventPosition}</td>
-                          <td style={{padding: "0.75rem 0.8rem", textAlign: "center", fontWeight: "700", color: "rgb(109, 40, 217)"}}>+{eventPoints}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            )
+                          🥇 Posición
+                        </p>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: "0.9rem",
+                            color: "rgb(194, 65, 12)",
+                            fontWeight: "800",
+                          }}
+                        >
+                          {eventPosition}
+                        </p>
+                      </div>
+
+                      <div
+                        style={{
+                          backgroundColor: "rgb(245, 243, 255)",
+                          border: "1px solid rgb(221, 214, 254)",
+                          borderRadius: "0.8rem",
+                          padding: "0.45rem 0.5rem",
+                          textAlign: "center",
+                        }}
+                      >
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: "0.64rem",
+                            color: "rgb(91, 33, 182)",
+                            fontWeight: "700",
+                          }}
+                        >
+                          ⭐ Puntos
+                        </p>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: "0.9rem",
+                            color: "rgb(109, 40, 217)",
+                            fontWeight: "800",
+                          }}
+                        >
+                          +{eventPoints}
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            <div style={{overflowX: "auto"}}>
+              <table
+                style={{
+                  width: "100%",
+                  borderCollapse: "collapse",
+                  fontSize: "0.9rem",
+                }}
+              >
+                <thead>
+                  <tr
+                    style={{
+                      background:
+                        "linear-gradient(to right, rgb(6, 182, 212), rgb(139, 92, 246))",
+                      color: "white",
+                      borderBottom: "3px solid rgb(8, 145, 178)",
+                    }}
+                  >
+                    <th
+                      style={{
+                        padding: "0.8rem",
+                        textAlign: "left",
+                        fontWeight: "600",
+                      }}
+                    >
+                      📅 Fecha
+                    </th>
+                    <th
+                      style={{
+                        padding: "0.8rem",
+                        textAlign: "left",
+                        fontWeight: "600",
+                      }}
+                    >
+                      🏅 Torneo
+                    </th>
+                    <th
+                      style={{
+                        padding: "0.8rem",
+                        textAlign: "left",
+                        fontWeight: "600",
+                      }}
+                    >
+                      📂 Categoría
+                    </th>
+                    <th
+                      style={{
+                        padding: "0.8rem",
+                        textAlign: "left",
+                        fontWeight: "600",
+                      }}
+                    >
+                      👥 Pareja
+                    </th>
+                    <th
+                      style={{
+                        padding: "0.8rem",
+                        textAlign: "center",
+                        fontWeight: "600",
+                      }}
+                    >
+                      🥇 Posición
+                    </th>
+                    <th
+                      style={{
+                        padding: "0.8rem",
+                        textAlign: "center",
+                        fontWeight: "600",
+                      }}
+                    >
+                      ⭐ Puntos
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredGames.map((r, idx) => {
+                    const eventDate =
+                      r.DATE ||
+                      r.Date ||
+                      r.date ||
+                      r.FECHA ||
+                      r.Fecha ||
+                      r.fecha ||
+                      "-";
+                    const eventName =
+                      r.TOURNAMENT ||
+                      r.Tournament ||
+                      r.tournament ||
+                      r.TORNEO ||
+                      r.Torneo ||
+                      r.torneo ||
+                      r.TOURNAMENT_NAME ||
+                      r.NAME ||
+                      "-";
+                    const eventCategory =
+                      r.CATEGORY ||
+                      r.Category ||
+                      r.category ||
+                      r.CATEGORIA ||
+                      r.Categoria ||
+                      r.categoria ||
+                      "-";
+                    const eventCouple =
+                      r.COUPLE_NAME ||
+                      r.Couple_Name ||
+                      r.couple_name ||
+                      r.PARTNER ||
+                      r.Partner ||
+                      r.partner ||
+                      r.PAREJA ||
+                      r.Pareja ||
+                      r.pareja ||
+                      r.PARTNER_NAME ||
+                      "-";
+                    const eventPosition =
+                      r.POSITION ||
+                      r.Position ||
+                      r.position ||
+                      r.POSICION ||
+                      r.Posicion ||
+                      r.posicion ||
+                      "-";
+                    const eventPoints =
+                      r.POINTS ||
+                      r.Points ||
+                      r.points ||
+                      r.PUNTOS ||
+                      r.Puntos ||
+                      r.puntos ||
+                      "-";
+
+                    return (
+                      <tr
+                        key={idx}
+                        style={{
+                          borderBottom: "1px solid rgb(226, 232, 240)",
+                          transition: "background-color 0.2s ease-in-out",
+                        }}
+                        onMouseOver={(e) =>
+                          (e.currentTarget.style.backgroundColor =
+                            "rgb(241, 245, 249)")
+                        }
+                        onMouseOut={(e) =>
+                          (e.currentTarget.style.backgroundColor =
+                            "transparent")
+                        }
+                      >
+                        <td style={{padding: "0.75rem 0.8rem"}}>{eventDate}</td>
+                        <td
+                          style={{
+                            padding: "0.75rem 0.8rem",
+                            fontWeight: "600",
+                            color: "rgb(15, 23, 42)",
+                          }}
+                        >
+                          {eventName}
+                        </td>
+                        <td style={{padding: "0.75rem 0.8rem"}}>
+                          <span
+                            style={{
+                              backgroundColor: "rgb(165, 243, 252)",
+                              color: "rgb(8, 145, 178)",
+                              padding: "0.2rem 0.55rem",
+                              borderRadius: "9999px",
+                              fontSize: "0.78rem",
+                              fontWeight: "600",
+                            }}
+                          >
+                            {eventCategory}
+                          </span>
+                        </td>
+                        <td style={{padding: "0.75rem 0.8rem"}}>
+                          {eventCouple}
+                        </td>
+                        <td
+                          style={{
+                            padding: "0.75rem 0.8rem",
+                            textAlign: "center",
+                            fontWeight: "700",
+                            color: "rgb(194, 65, 12)",
+                          }}
+                        >
+                          {eventPosition}
+                        </td>
+                        <td
+                          style={{
+                            padding: "0.75rem 0.8rem",
+                            textAlign: "center",
+                            fontWeight: "700",
+                            color: "rgb(109, 40, 217)",
+                          }}
+                        >
+                          +{eventPoints}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>
