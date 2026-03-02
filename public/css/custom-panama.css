@@ -1,0 +1,63 @@
+.tp-button.green,
+.tp-button:hover.green,
+.purchase.green,
+.purchase:hover.green {
+  background-color: #003d99 !important;
+  -webkit-box-shadow: 0px 3px 0px 0px #002a80 !important;
+  -moz-box-shadow: 0px 3px 0px 0px #002a80 !important;
+  box-shadow: 0px 3px 0px 0px #002a80 !important;
+}
+
+/* Carrusel sencillo de marcas asociadas (sin controles) */
+.aliados-slider {
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.aliados-track {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  animation: aliados-scroll 35s linear infinite;
+}
+
+.aliados-logo {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aliados-logo img {
+  max-height: 140px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px 28px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes aliados-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Ajustes responsive para móvil */
+@media (max-width: 767px) {
+  .aliados-track {
+    gap: 20px;
+    animation-duration: 45s;
+  }
+
+  .aliados-logo img {
+    max-height: 90px;
+    padding: 8px 16px;
+  }
+}
