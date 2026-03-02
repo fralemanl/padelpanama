@@ -136,7 +136,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
       borderBottom: "4px solid rgb(8, 145, 178)",
     },
     th: {
-      padding: isMobile ? "0.55rem 0.35rem" : "1.5rem 1.5rem",
+      padding: isMobile ? "0.5rem 0.2rem" : "1.5rem 1.5rem",
       textAlign: "left",
       fontSize: isMobile ? "0.66rem" : "0.875rem",
       fontWeight: "600",
@@ -152,7 +152,11 @@ export default function RankingTable({players, allPlayers = [], category}) {
       backgroundColor: "rgb(219, 234, 254)",
     },
     td: {
-      padding: isMobile ? "0.48rem 0.3rem" : "1.5rem 1.5rem",
+      padding: isMobile ? "0.42rem 0.18rem" : "1.5rem 1.5rem",
+      fontSize: isMobile ? "0.72rem" : "0.95rem",
+    },
+    playerTd: {
+      padding: isMobile ? "0.42rem 0.08rem 0.42rem 0.18rem" : "1.5rem 1.5rem",
       fontSize: isMobile ? "0.72rem" : "0.95rem",
     },
     rankCell: {
@@ -218,6 +222,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
       fontWeight: "bold",
       fontSize: isMobile ? "0.74rem" : "1.125rem",
       color: "rgb(15, 23, 42)",
+      padding: isMobile ? "0.42rem 0.12rem" : undefined,
     },
   };
 
@@ -234,13 +239,17 @@ export default function RankingTable({players, allPlayers = [], category}) {
                 Nacionalidad
               </th>
             )}
-            <th style={{...tableStyles.th, width: isMobile ? "44%" : "auto"}}>
+            <th style={{...tableStyles.th, width: isMobile ? "40%" : "auto"}}>
               Jugador
             </th>
             {!isMobile && (
               <th style={{...tableStyles.th, textAlign: "center"}}>
                 <div
-                  style={{display: "flex", flexDirection: "column", gap: "0.15rem"}}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.15rem",
+                  }}
                 >
                   <span>Categoría/</span>
                   <span style={{fontSize: "0.9rem", opacity: 0.9}}>
@@ -249,10 +258,22 @@ export default function RankingTable({players, allPlayers = [], category}) {
                 </div>
               </th>
             )}
-            <th style={{...tableStyles.th, textAlign: "center", width: isMobile ? "18%" : "auto"}}>
+            <th
+              style={{
+                ...tableStyles.th,
+                textAlign: "center",
+                width: isMobile ? "20%" : "auto",
+              }}
+            >
               ELO
             </th>
-            <th style={{...tableStyles.th, textAlign: "center", width: isMobile ? "18%" : "auto"}}>
+            <th
+              style={{
+                ...tableStyles.th,
+                textAlign: "center",
+                width: isMobile ? "20%" : "auto",
+              }}
+            >
               Puntos
             </th>
           </tr>
@@ -314,7 +335,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
                     </div>
                   </td>
                 )}
-                <td style={tableStyles.td}>
+                <td style={tableStyles.playerTd}>
                   <div style={tableStyles.playerCell}>
                     {fotoSrc && (
                       <img
@@ -370,7 +391,9 @@ export default function RankingTable({players, allPlayers = [], category}) {
                         {player.CATEGORY || "—"}
                       </span>
                       <span style={tableStyles.badge}>#{categoryRank}</span>
-                      {medal && <span style={{fontSize: "1.1rem"}}>{medal}</span>}
+                      {medal && (
+                        <span style={{fontSize: "1.1rem"}}>{medal}</span>
+                      )}
                     </div>
                   </td>
                 )}

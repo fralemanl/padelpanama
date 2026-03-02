@@ -1011,7 +1011,9 @@ export default function PlayerPageClient() {
                           style={{
                             backgroundColor: "rgb(165, 243, 252)",
                             color: "rgb(8, 145, 178)",
-                            padding: isMobile ? "0.2rem 0.5rem" : "0.25rem 0.75rem",
+                            padding: isMobile
+                              ? "0.2rem 0.5rem"
+                              : "0.25rem 0.75rem",
                             borderRadius: "9999px",
                             fontSize: isMobile ? "0.72rem" : "0.875rem",
                             fontWeight: "600",

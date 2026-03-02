@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import {notFound, redirect} from "next/navigation";
 
 const htmlPages = new Set([
   "index",
@@ -48,7 +48,7 @@ type SlugPageProps = {
   }>;
 };
 
-export default async function SlugPage({ params }: SlugPageProps) {
+export default async function SlugPage({params}: SlugPageProps) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug.toLowerCase();
 

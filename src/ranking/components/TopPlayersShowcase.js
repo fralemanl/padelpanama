@@ -489,7 +489,14 @@ export default function TopPlayersShowcase({players, gender, category}) {
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               style={{
-                width: idx === currentIndex ? (isMobile ? "1.5rem" : "2rem") : isMobile ? "0.55rem" : "0.75rem",
+                width:
+                  idx === currentIndex
+                    ? isMobile
+                      ? "1.5rem"
+                      : "2rem"
+                    : isMobile
+                      ? "0.55rem"
+                      : "0.75rem",
                 height: isMobile ? "0.55rem" : "0.75rem",
                 borderRadius: "9999px",
                 backgroundColor:
