@@ -368,26 +368,6 @@ export default function PlayerPageClient() {
   const nationality = player.NATIONALITY || "";
   const flagImagePath = getFlagImagePath(nationality);
   const appId = player.APP_ID ?? "—";
-  const tableCellPadding = isMobile ? "0.65rem" : "1rem";
-  const tableFontSize = isMobile ? "0.78rem" : "0.95rem";
-  const historicHeaderCellStyle = {
-    padding: tableCellPadding,
-    textAlign: "left",
-    fontWeight: "600",
-    whiteSpace: "normal",
-    wordBreak: "break-word",
-    overflowWrap: "anywhere",
-    lineHeight: isMobile ? 1.2 : 1.3,
-    verticalAlign: "top",
-  };
-  const historicCellStyle = {
-    padding: tableCellPadding,
-    whiteSpace: "normal",
-    wordBreak: "break-word",
-    overflowWrap: "anywhere",
-    lineHeight: isMobile ? 1.25 : 1.35,
-    verticalAlign: "top",
-  };
 
   const globalRank = (() => {
     if (!allPlayers.length) return "—";
@@ -909,177 +889,231 @@ export default function PlayerPageClient() {
               </p>
             </div>
           ) : (
-            <div style={{overflowX: isMobile ? "hidden" : "auto"}}>
-              <table
-                style={{
-                  width: "100%",
-                  borderCollapse: "collapse",
-                  fontSize: tableFontSize,
-                  tableLayout: isMobile ? "fixed" : "auto",
-                }}
-              >
-                <thead>
-                  <tr
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: isMobile
+                  ? "1fr"
+                  : "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: isMobile ? "0.9rem" : "1.1rem",
+              }}
+            >
+              {filteredGames.map((r, idx) => {
+                const eventDate =
+                  r.DATE ||
+                  r.Date ||
+                  r.date ||
+                  r.FECHA ||
+                  r.Fecha ||
+                  r.fecha ||
+                  "-";
+                const eventName =
+                  r.TOURNAMENT ||
+                  r.Tournament ||
+                  r.tournament ||
+                  r.TORNEO ||
+                  r.Torneo ||
+                  r.torneo ||
+                  r.TOURNAMENT_NAME ||
+                  r.NAME ||
+                  "-";
+                const eventCategory =
+                  r.CATEGORY ||
+                  r.Category ||
+                  r.category ||
+                  r.CATEGORIA ||
+                  r.Categoria ||
+                  r.categoria ||
+                  "-";
+                const eventCouple =
+                  r.COUPLE_NAME ||
+                  r.Couple_Name ||
+                  r.couple_name ||
+                  r.PARTNER ||
+                  r.Partner ||
+                  r.partner ||
+                  r.PAREJA ||
+                  r.Pareja ||
+                  r.pareja ||
+                  r.PARTNER_NAME ||
+                  "-";
+                const eventPosition =
+                  r.POSITION ||
+                  r.Position ||
+                  r.position ||
+                  r.POSICION ||
+                  r.Posicion ||
+                  r.posicion ||
+                  "-";
+                const eventPoints =
+                  r.POINTS ||
+                  r.Points ||
+                  r.points ||
+                  r.PUNTOS ||
+                  r.Puntos ||
+                  r.puntos ||
+                  "-";
+
+                return (
+                  <article
+                    key={idx}
                     style={{
                       background:
-                        "linear-gradient(to right, rgb(6, 182, 212), rgb(139, 92, 246))",
-                      color: "white",
-                      borderBottom: "3px solid rgb(8, 145, 178)",
+                        "linear-gradient(180deg, rgb(255, 255, 255), rgb(248, 250, 252))",
+                      border: "1px solid rgb(203, 213, 225)",
+                      borderRadius: "1rem",
+                      padding: isMobile ? "0.85rem" : "1.05rem",
+                      boxShadow: "0 8px 18px rgba(15, 23, 42, 0.08)",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "0.7rem",
+                      overflow: "hidden",
                     }}
                   >
-                    <th style={{...historicHeaderCellStyle, width: isMobile ? "14%" : "auto"}}>
-                      📅 Fecha
-                    </th>
-                    <th style={{...historicHeaderCellStyle, width: isMobile ? "24%" : "auto"}}>
-                      🏅 Torneo
-                    </th>
-                    <th style={{...historicHeaderCellStyle, width: isMobile ? "16%" : "auto"}}>
-                      📂 Categoría
-                    </th>
-                    <th style={{...historicHeaderCellStyle, width: isMobile ? "22%" : "auto"}}>
-                      👥 Pareja
-                    </th>
-                    <th
+                    <div
                       style={{
-                        ...historicHeaderCellStyle,
-                        textAlign: "center",
-                        width: isMobile ? "12%" : "auto",
+                        height: "4px",
+                        borderRadius: "9999px",
+                        background:
+                          "linear-gradient(to right, rgb(6, 182, 212), rgb(139, 92, 246))",
+                        margin: isMobile ? "-0.85rem -0.85rem 0" : "-1.05rem -1.05rem 0",
+                      }}
+                    />
+
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: "0.5rem",
+                        flexWrap: "wrap",
                       }}
                     >
-                      🥇 Posición
-                    </th>
-                    <th
-                      style={{
-                        ...historicHeaderCellStyle,
-                        textAlign: "center",
-                        width: isMobile ? "12%" : "auto",
-                      }}
-                    >
-                      ⭐ Puntos
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredGames.map((r, idx) => (
-                    <tr
-                      key={idx}
-                      style={{
-                        borderBottom: "1px solid rgb(226, 232, 240)",
-                        transition: "background-color 0.3s ease-in-out",
-                      }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor =
-                          "rgb(241, 245, 249)")
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor = "transparent")
-                      }
-                    >
-                      <td style={historicCellStyle}>
-                        {r.DATE ||
-                          r.Date ||
-                          r.date ||
-                          r.FECHA ||
-                          r.Fecha ||
-                          r.fecha ||
-                          "-"}
-                      </td>
-                      <td
+                      <span
                         style={{
-                          ...historicCellStyle,
-                          fontWeight: "600",
-                          color: "rgb(15, 23, 42)",
+                          fontSize: isMobile ? "0.7rem" : "0.78rem",
+                          color: "rgb(71, 85, 105)",
+                          fontWeight: "700",
+                          letterSpacing: "0.01em",
                         }}
                       >
-                        {r.TOURNAMENT ||
-                          r.Tournament ||
-                          r.tournament ||
-                          r.TORNEO ||
-                          r.Torneo ||
-                          r.torneo ||
-                          r.TOURNAMENT_NAME ||
-                          r.NAME ||
-                          "-"}
-                      </td>
-                      <td style={historicCellStyle}>
-                        <span
+                        📅 {eventDate}
+                      </span>
+                      <span
+                        style={{
+                          backgroundColor: "rgb(165, 243, 252)",
+                          color: "rgb(8, 145, 178)",
+                          borderRadius: "9999px",
+                          padding: "0.22rem 0.58rem",
+                          fontSize: isMobile ? "0.68rem" : "0.74rem",
+                          fontWeight: "700",
+                          maxWidth: "100%",
+                          whiteSpace: "normal",
+                          overflowWrap: "anywhere",
+                        }}
+                      >
+                        {eventCategory}
+                      </span>
+                    </div>
+
+                    <h3
+                      style={{
+                        margin: 0,
+                        fontSize: isMobile ? "0.95rem" : "1.05rem",
+                        color: "rgb(15, 23, 42)",
+                        lineHeight: 1.3,
+                        whiteSpace: "normal",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
+                      🏅 {eventName}
+                    </h3>
+
+                    <p
+                      style={{
+                        margin: 0,
+                        fontSize: isMobile ? "0.79rem" : "0.87rem",
+                        color: "rgb(51, 65, 85)",
+                        lineHeight: 1.3,
+                        whiteSpace: "normal",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
+                      👥 Pareja: {eventCouple}
+                    </p>
+
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <div
+                        style={{
+                          backgroundColor: "rgb(255, 247, 237)",
+                          border: "1px solid rgb(254, 215, 170)",
+                          borderRadius: "0.8rem",
+                          padding: "0.45rem 0.5rem",
+                          textAlign: "center",
+                        }}
+                      >
+                        <p
                           style={{
-                            backgroundColor: "rgb(165, 243, 252)",
-                            color: "rgb(8, 145, 178)",
-                            padding: isMobile
-                              ? "0.2rem 0.5rem"
-                              : "0.25rem 0.75rem",
-                            borderRadius: "9999px",
-                            fontSize: isMobile ? "0.72rem" : "0.875rem",
-                            fontWeight: "600",
-                            display: "inline-block",
-                            maxWidth: "100%",
-                            whiteSpace: "normal",
-                            wordBreak: "break-word",
-                            overflowWrap: "anywhere",
-                            lineHeight: isMobile ? 1.2 : 1.3,
+                            margin: 0,
+                            fontSize: isMobile ? "0.64rem" : "0.72rem",
+                            color: "rgb(154, 52, 18)",
+                            fontWeight: "700",
                           }}
                         >
-                          {r.CATEGORY ||
-                            r.Category ||
-                            r.category ||
-                            r.CATEGORIA ||
-                            r.Categoria ||
-                            r.categoria ||
-                            "-"}
-                        </span>
-                      </td>
-                      <td style={historicCellStyle}>
-                        {r.COUPLE_NAME ||
-                          r.Couple_Name ||
-                          r.couple_name ||
-                          r.PARTNER ||
-                          r.Partner ||
-                          r.partner ||
-                          r.PAREJA ||
-                          r.Pareja ||
-                          r.pareja ||
-                          r.PARTNER_NAME ||
-                          "-"}
-                      </td>
-                      <td
+                          🥇 Posición
+                        </p>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: isMobile ? "0.9rem" : "1rem",
+                            color: "rgb(194, 65, 12)",
+                            fontWeight: "800",
+                          }}
+                        >
+                          {eventPosition}
+                        </p>
+                      </div>
+
+                      <div
                         style={{
-                          ...historicCellStyle,
+                          backgroundColor: "rgb(245, 243, 255)",
+                          border: "1px solid rgb(221, 214, 254)",
+                          borderRadius: "0.8rem",
+                          padding: "0.45rem 0.5rem",
                           textAlign: "center",
-                          fontWeight: "bold",
-                          color: "rgb(234, 88, 12)",
                         }}
                       >
-                        {r.POSITION ||
-                          r.Position ||
-                          r.position ||
-                          r.POSICION ||
-                          r.Posicion ||
-                          r.posicion ||
-                          "-"}
-                      </td>
-                      <td
-                        style={{
-                          ...historicCellStyle,
-                          textAlign: "center",
-                          fontWeight: "bold",
-                          color: "rgb(139, 92, 246)",
-                          fontSize: isMobile ? "0.9rem" : "1.1rem",
-                        }}
-                      >
-                        +
-                        {r.POINTS ||
-                          r.Points ||
-                          r.points ||
-                          r.PUNTOS ||
-                          r.Puntos ||
-                          r.puntos ||
-                          "-"}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: isMobile ? "0.64rem" : "0.72rem",
+                            color: "rgb(91, 33, 182)",
+                            fontWeight: "700",
+                          }}
+                        >
+                          ⭐ Puntos
+                        </p>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: isMobile ? "0.9rem" : "1rem",
+                            color: "rgb(109, 40, 217)",
+                            fontWeight: "800",
+                          }}
+                        >
+                          +{eventPoints}
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           )}
         </div>
