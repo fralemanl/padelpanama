@@ -120,12 +120,13 @@ export default function RankingTable({players, allPlayers = [], category}) {
 
   const tableStyles = {
     wrapper: {
-      overflowX: "auto",
+      overflowX: isMobile ? "hidden" : "auto",
       width: "100%",
     },
     table: {
       width: "100%",
-      minWidth: isMobile ? "920px" : "100%",
+      minWidth: "100%",
+      tableLayout: isMobile ? "fixed" : "auto",
       borderCollapse: "collapse",
     },
     thead: {
@@ -135,9 +136,9 @@ export default function RankingTable({players, allPlayers = [], category}) {
       borderBottom: "4px solid rgb(8, 145, 178)",
     },
     th: {
-      padding: isMobile ? "0.8rem 0.75rem" : "1.5rem 1.5rem",
+      padding: isMobile ? "0.55rem 0.35rem" : "1.5rem 1.5rem",
       textAlign: "left",
-      fontSize: isMobile ? "0.72rem" : "0.875rem",
+      fontSize: isMobile ? "0.66rem" : "0.875rem",
       fontWeight: "600",
     },
     tbody: {
@@ -151,8 +152,8 @@ export default function RankingTable({players, allPlayers = [], category}) {
       backgroundColor: "rgb(219, 234, 254)",
     },
     td: {
-      padding: isMobile ? "0.75rem" : "1.5rem 1.5rem",
-      fontSize: isMobile ? "0.78rem" : "0.95rem",
+      padding: isMobile ? "0.48rem 0.3rem" : "1.5rem 1.5rem",
+      fontSize: isMobile ? "0.72rem" : "0.95rem",
     },
     rankCell: {
       display: "flex",
@@ -164,7 +165,8 @@ export default function RankingTable({players, allPlayers = [], category}) {
     playerCell: {
       display: "flex",
       alignItems: "center",
-      gap: isMobile ? "0.5rem" : "0.75rem",
+      gap: isMobile ? "0.2rem" : "0.75rem",
+      minWidth: 0,
     },
     flagCell: {
       display: "flex",
@@ -179,18 +181,24 @@ export default function RankingTable({players, allPlayers = [], category}) {
       boxShadow: "0 2px 6px rgba(0, 0, 0, 0.2)",
     },
     playerImage: {
-      width: isMobile ? "2rem" : "2.5rem",
-      height: isMobile ? "2rem" : "2.5rem",
+      width: isMobile ? "0" : "2.5rem",
+      height: isMobile ? "0" : "2.5rem",
       borderRadius: "50%",
       objectFit: "cover",
       border: "2px solid rgb(186, 225, 247)",
+      display: isMobile ? "none" : "block",
     },
     playerLink: {
       fontWeight: "600",
-      fontSize: isMobile ? "0.8rem" : "0.95rem",
+      fontSize: isMobile ? "0.72rem" : "0.95rem",
       color: "rgb(6, 182, 212)",
       textDecoration: "none",
       transition: "color 0.3s ease-in-out",
+      whiteSpace: isMobile ? "nowrap" : "normal",
+      overflow: isMobile ? "hidden" : "visible",
+      textOverflow: isMobile ? "ellipsis" : "clip",
+      display: "block",
+      width: "100%",
     },
     playerLinkHover: {
       color: "rgb(8, 145, 178)",
@@ -208,7 +216,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
     scoreCell: {
       textAlign: "center",
       fontWeight: "bold",
-      fontSize: isMobile ? "0.84rem" : "1.125rem",
+      fontSize: isMobile ? "0.74rem" : "1.125rem",
       color: "rgb(15, 23, 42)",
     },
   };
@@ -218,13 +226,17 @@ export default function RankingTable({players, allPlayers = [], category}) {
       <table style={tableStyles.table}>
         <thead style={tableStyles.thead}>
           <tr>
-            <th style={tableStyles.th}>Posición</th>
+            <th style={{...tableStyles.th, width: isMobile ? "20%" : "auto"}}>
+              Posición
+            </th>
             {!isMobile && (
               <th style={{...tableStyles.th, textAlign: "center"}}>
                 Nacionalidad
               </th>
             )}
-            <th style={tableStyles.th}>Jugador</th>
+            <th style={{...tableStyles.th, width: isMobile ? "44%" : "auto"}}>
+              Jugador
+            </th>
             {!isMobile && (
               <th style={{...tableStyles.th, textAlign: "center"}}>
                 <div
@@ -237,8 +249,12 @@ export default function RankingTable({players, allPlayers = [], category}) {
                 </div>
               </th>
             )}
-            <th style={{...tableStyles.th, textAlign: "center"}}>ELO</th>
-            <th style={{...tableStyles.th, textAlign: "center"}}>Puntos</th>
+            <th style={{...tableStyles.th, textAlign: "center", width: isMobile ? "18%" : "auto"}}>
+              ELO
+            </th>
+            <th style={{...tableStyles.th, textAlign: "center", width: isMobile ? "18%" : "auto"}}>
+              Puntos
+            </th>
           </tr>
         </thead>
         <tbody style={tableStyles.tbody}>
