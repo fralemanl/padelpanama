@@ -69,6 +69,14 @@ export default function HomePageClient() {
   const storageKey = "rankingEloFilters";
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -260,33 +268,45 @@ export default function HomePageClient() {
 
         <section
           style={{
-            marginBottom: "2rem",
+            marginBottom: isMobile ? "1.2rem" : "2rem",
             backgroundColor: "rgb(15, 23, 42)",
-            borderRadius: "1rem",
-            padding: "1.5rem",
+            borderRadius: isMobile ? "0.75rem" : "1rem",
+            padding: isMobile ? "0.9rem" : "1.5rem",
             color: "white",
             display: "flex",
             flexWrap: "wrap",
             alignItems: "center",
             justifyContent: "space-between",
-            gap: "1rem",
+            gap: isMobile ? "0.65rem" : "1rem",
           }}
         >
-          <div style={{fontSize: "1.25rem", fontWeight: "700"}}>
+          <div
+            style={{
+              fontSize: isMobile ? "0.92rem" : "1.25rem",
+              fontWeight: "700",
+            }}
+          >
             Calcula tu categoria y consulta los limites ELO
           </div>
-          <div style={{display: "flex", gap: "0.75rem", flexWrap: "wrap"}}>
+          <div
+            style={{
+              display: "flex",
+              gap: isMobile ? "0.5rem" : "0.75rem",
+              flexWrap: "wrap",
+            }}
+          >
             <Link
               href={`${basePath}/elo`}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
-                padding: "0.75rem 1.5rem",
+                padding: isMobile ? "0.5rem 0.8rem" : "0.75rem 1.5rem",
                 borderRadius: "999px",
                 backgroundColor: "white",
                 color: "rgb(15, 23, 42)",
                 fontWeight: "700",
+                fontSize: isMobile ? "0.78rem" : "0.95rem",
                 textDecoration: "none",
               }}
             >
@@ -296,12 +316,13 @@ export default function HomePageClient() {
               type="button"
               onClick={() => setShowLegend(true)}
               style={{
-                padding: "0.75rem 1.5rem",
+                padding: isMobile ? "0.5rem 0.8rem" : "0.75rem 1.5rem",
                 borderRadius: "999px",
                 backgroundColor: "rgb(30, 41, 59)",
                 color: "white",
                 border: "1px solid rgba(255, 255, 255, 0.2)",
                 fontWeight: "700",
+                fontSize: isMobile ? "0.78rem" : "0.95rem",
                 cursor: "pointer",
               }}
             >
