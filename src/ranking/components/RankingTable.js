@@ -137,7 +137,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
     th: {
       padding: isMobile ? "0.8rem 0.75rem" : "1.5rem 1.5rem",
       textAlign: "left",
-      fontSize: isMobile ? "0.78rem" : "0.875rem",
+      fontSize: isMobile ? "0.72rem" : "0.875rem",
       fontWeight: "600",
     },
     tbody: {
@@ -152,6 +152,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
     },
     td: {
       padding: isMobile ? "0.75rem" : "1.5rem 1.5rem",
+      fontSize: isMobile ? "0.78rem" : "0.95rem",
     },
     rankCell: {
       display: "flex",
@@ -163,7 +164,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
     playerCell: {
       display: "flex",
       alignItems: "center",
-      gap: "0.75rem",
+      gap: isMobile ? "0.5rem" : "0.75rem",
     },
     flagCell: {
       display: "flex",
@@ -186,6 +187,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
     },
     playerLink: {
       fontWeight: "600",
+      fontSize: isMobile ? "0.8rem" : "0.95rem",
       color: "rgb(6, 182, 212)",
       textDecoration: "none",
       transition: "color 0.3s ease-in-out",
@@ -206,7 +208,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
     scoreCell: {
       textAlign: "center",
       fontWeight: "bold",
-      fontSize: isMobile ? "0.95rem" : "1.125rem",
+      fontSize: isMobile ? "0.84rem" : "1.125rem",
       color: "rgb(15, 23, 42)",
     },
   };

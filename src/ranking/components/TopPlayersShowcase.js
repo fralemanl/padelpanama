@@ -283,7 +283,7 @@ export default function TopPlayersShowcase({players, gender, category}) {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
-                  gap: isMobile ? "0.5rem" : "0.75rem",
+                  gap: isMobile ? "0.28rem" : "0.75rem",
                   paddingLeft: isMobile ? "0.5rem" : "1rem",
                 }}
               >

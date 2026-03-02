@@ -93,8 +93,16 @@ export default function PlayerPageClient() {
   const [loading, setLoading] = useState(true);
   const [games, setGames] = useState([]);
   const [filteredGames, setFilteredGames] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const getFoto = (p) => (p?.FOTO || p?.Foto || p?.foto || "").trim();
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (!playerId) return;
@@ -364,6 +372,8 @@ export default function PlayerPageClient() {
   const nationality = player.NATIONALITY || "";
   const flagImagePath = getFlagImagePath(nationality);
   const appId = player.APP_ID ?? "—";
+  const tableCellPadding = isMobile ? "0.65rem" : "1rem";
+  const tableFontSize = isMobile ? "0.78rem" : "0.95rem";
 
   const globalRank = (() => {
     if (!allPlayers.length) return "—";
@@ -938,7 +948,7 @@ export default function PlayerPageClient() {
                 style={{
                   width: "100%",
                   borderCollapse: "collapse",
-                  fontSize: "0.95rem",
+                  fontSize: tableFontSize,
                 }}
               >
                 <thead>
@@ -952,7 +962,7 @@ export default function PlayerPageClient() {
                   >
                     <th
                       style={{
-                        padding: "1rem",
+                        padding: tableCellPadding,
                         textAlign: "left",
                         fontWeight: "600",
                       }}
@@ -961,7 +971,7 @@ export default function PlayerPageClient() {
                     </th>
                     <th
                       style={{
-                        padding: "1rem",
+                        padding: tableCellPadding,
                         textAlign: "left",
                         fontWeight: "600",
                       }}
@@ -970,7 +980,7 @@ export default function PlayerPageClient() {
                     </th>
                     <th
                       style={{
-                        padding: "1rem",
+                        padding: tableCellPadding,
                         textAlign: "left",
                         fontWeight: "600",
                       }}
@@ -979,7 +989,7 @@ export default function PlayerPageClient() {
                     </th>
                     <th
                       style={{
-                        padding: "1rem",
+                        padding: tableCellPadding,
                         textAlign: "left",
                         fontWeight: "600",
                       }}
@@ -988,7 +998,7 @@ export default function PlayerPageClient() {
                     </th>
                     <th
                       style={{
-                        padding: "1rem",
+                        padding: tableCellPadding,
                         textAlign: "center",
                         fontWeight: "600",
                       }}
@@ -997,7 +1007,7 @@ export default function PlayerPageClient() {
                     </th>
                     <th
                       style={{
-                        padding: "1rem",
+                        padding: tableCellPadding,
                         textAlign: "center",
                         fontWeight: "600",
                       }}
@@ -1022,7 +1032,7 @@ export default function PlayerPageClient() {
                         (e.currentTarget.style.backgroundColor = "transparent")
                       }
                     >
-                      <td style={{padding: "1rem"}}>
+                      <td style={{padding: tableCellPadding}}>
                         {r.DATE ||
                           r.Date ||
                           r.date ||
@@ -1033,7 +1043,7 @@ export default function PlayerPageClient() {
                       </td>
                       <td
                         style={{
-                          padding: "1rem",
+                          padding: tableCellPadding,
                           fontWeight: "600",
                           color: "rgb(15, 23, 42)",
                         }}
@@ -1048,14 +1058,14 @@ export default function PlayerPageClient() {
                           r.NAME ||
                           "-"}
                       </td>
-                      <td style={{padding: "1rem"}}>
+                      <td style={{padding: tableCellPadding}}>
                         <span
                           style={{
                             backgroundColor: "rgb(165, 243, 252)",
                             color: "rgb(8, 145, 178)",
-                            padding: "0.25rem 0.75rem",
+                            padding: isMobile ? "0.2rem 0.5rem" : "0.25rem 0.75rem",
                             borderRadius: "9999px",
-                            fontSize: "0.875rem",
+                            fontSize: isMobile ? "0.72rem" : "0.875rem",
                             fontWeight: "600",
                           }}
                         >
@@ -1068,7 +1078,7 @@ export default function PlayerPageClient() {
                             "-"}
                         </span>
                       </td>
-                      <td style={{padding: "1rem"}}>
+                      <td style={{padding: tableCellPadding}}>
                         {r.COUPLE_NAME ||
                           r.Couple_Name ||
                           r.couple_name ||
@@ -1083,7 +1093,7 @@ export default function PlayerPageClient() {
                       </td>
                       <td
                         style={{
-                          padding: "1rem",
+                          padding: tableCellPadding,
                           textAlign: "center",
                           fontWeight: "bold",
                           color: "rgb(234, 88, 12)",
@@ -1099,11 +1109,11 @@ export default function PlayerPageClient() {
                       </td>
                       <td
                         style={{
-                          padding: "1rem",
+                          padding: tableCellPadding,
                           textAlign: "center",
                           fontWeight: "bold",
                           color: "rgb(139, 92, 246)",
-                          fontSize: "1.1rem",
+                          fontSize: isMobile ? "0.9rem" : "1.1rem",
                         }}
                       >
                         +
