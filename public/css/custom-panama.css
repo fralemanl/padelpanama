@@ -58,7 +58,7 @@
 @media (max-width: 767px) {
   .aliados-track {
     gap: 20px;
-    animation-duration: 20s;
+    animation-duration: 30s;
   }
 
   .aliados-logo img {
