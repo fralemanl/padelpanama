@@ -1018,7 +1018,7 @@ export default function PlayerPageClient() {
                       <h3
                         style={{
                           margin: 0,
-                          fontSize: "0.95rem",
+                          fontSize: "0.89rem",
                           color: "rgb(15, 23, 42)",
                           lineHeight: 1.3,
                           whiteSpace: "normal",
