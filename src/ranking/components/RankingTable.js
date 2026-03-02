@@ -231,7 +231,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
       <table style={tableStyles.table}>
         <thead style={tableStyles.thead}>
           <tr>
-            <th style={{...tableStyles.th, width: isMobile ? "20%" : "auto"}}>
+            <th style={{...tableStyles.th, width: isMobile ? "18%" : "auto"}}>
               Posición
             </th>
             {!isMobile && (
@@ -239,7 +239,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
                 Nacionalidad
               </th>
             )}
-            <th style={{...tableStyles.th, width: isMobile ? "40%" : "auto"}}>
+            <th style={{...tableStyles.th, width: isMobile ? "60%" : "auto"}}>
               Jugador
             </th>
             {!isMobile && (
@@ -262,20 +262,22 @@ export default function RankingTable({players, allPlayers = [], category}) {
               style={{
                 ...tableStyles.th,
                 textAlign: "center",
-                width: isMobile ? "20%" : "auto",
+                width: isMobile ? "22%" : "auto",
               }}
             >
               ELO
             </th>
-            <th
-              style={{
-                ...tableStyles.th,
-                textAlign: "center",
-                width: isMobile ? "20%" : "auto",
-              }}
-            >
-              Puntos
-            </th>
+            {!isMobile && (
+              <th
+                style={{
+                  ...tableStyles.th,
+                  textAlign: "center",
+                  width: "auto",
+                }}
+              >
+                Puntos
+              </th>
+            )}
           </tr>
         </thead>
         <tbody style={tableStyles.tbody}>
@@ -400,7 +402,9 @@ export default function RankingTable({players, allPlayers = [], category}) {
                 <td style={tableStyles.scoreCell}>
                   {player.ELO_DISPLAY || player.ELO || 0}
                 </td>
-                <td style={tableStyles.scoreCell}>{player.POINTS || "—"}</td>
+                {!isMobile && (
+                  <td style={tableStyles.scoreCell}>{player.POINTS || "—"}</td>
+                )}
               </tr>
             );
           })}
