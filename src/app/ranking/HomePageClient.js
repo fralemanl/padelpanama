@@ -282,7 +282,7 @@ export default function HomePageClient() {
         >
           <div
             style={{
-              fontSize: isMobile ? "0.92rem" : "1.25rem",
+              fontSize: isMobile ? "0.80rem" : "1.25rem",
               fontWeight: "700",
             }}
           >
