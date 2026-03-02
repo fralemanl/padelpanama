@@ -370,6 +370,24 @@ export default function PlayerPageClient() {
   const appId = player.APP_ID ?? "—";
   const tableCellPadding = isMobile ? "0.65rem" : "1rem";
   const tableFontSize = isMobile ? "0.78rem" : "0.95rem";
+  const historicHeaderCellStyle = {
+    padding: tableCellPadding,
+    textAlign: "left",
+    fontWeight: "600",
+    whiteSpace: "normal",
+    wordBreak: "break-word",
+    overflowWrap: "anywhere",
+    lineHeight: isMobile ? 1.2 : 1.3,
+    verticalAlign: "top",
+  };
+  const historicCellStyle = {
+    padding: tableCellPadding,
+    whiteSpace: "normal",
+    wordBreak: "break-word",
+    overflowWrap: "anywhere",
+    lineHeight: isMobile ? 1.25 : 1.35,
+    verticalAlign: "top",
+  };
 
   const globalRank = (() => {
     if (!allPlayers.length) return "—";
@@ -891,12 +909,13 @@ export default function PlayerPageClient() {
               </p>
             </div>
           ) : (
-            <div style={{overflowX: "auto"}}>
+            <div style={{overflowX: isMobile ? "hidden" : "auto"}}>
               <table
                 style={{
                   width: "100%",
                   borderCollapse: "collapse",
                   fontSize: tableFontSize,
+                  tableLayout: isMobile ? "fixed" : "auto",
                 }}
               >
                 <thead>
@@ -908,56 +927,32 @@ export default function PlayerPageClient() {
                       borderBottom: "3px solid rgb(8, 145, 178)",
                     }}
                   >
-                    <th
-                      style={{
-                        padding: tableCellPadding,
-                        textAlign: "left",
-                        fontWeight: "600",
-                      }}
-                    >
+                    <th style={{...historicHeaderCellStyle, width: isMobile ? "14%" : "auto"}}>
                       📅 Fecha
                     </th>
-                    <th
-                      style={{
-                        padding: tableCellPadding,
-                        textAlign: "left",
-                        fontWeight: "600",
-                      }}
-                    >
+                    <th style={{...historicHeaderCellStyle, width: isMobile ? "24%" : "auto"}}>
                       🏅 Torneo
                     </th>
-                    <th
-                      style={{
-                        padding: tableCellPadding,
-                        textAlign: "left",
-                        fontWeight: "600",
-                      }}
-                    >
+                    <th style={{...historicHeaderCellStyle, width: isMobile ? "16%" : "auto"}}>
                       📂 Categoría
                     </th>
-                    <th
-                      style={{
-                        padding: tableCellPadding,
-                        textAlign: "left",
-                        fontWeight: "600",
-                      }}
-                    >
+                    <th style={{...historicHeaderCellStyle, width: isMobile ? "22%" : "auto"}}>
                       👥 Pareja
                     </th>
                     <th
                       style={{
-                        padding: tableCellPadding,
+                        ...historicHeaderCellStyle,
                         textAlign: "center",
-                        fontWeight: "600",
+                        width: isMobile ? "12%" : "auto",
                       }}
                     >
                       🥇 Posición
                     </th>
                     <th
                       style={{
-                        padding: tableCellPadding,
+                        ...historicHeaderCellStyle,
                         textAlign: "center",
-                        fontWeight: "600",
+                        width: isMobile ? "12%" : "auto",
                       }}
                     >
                       ⭐ Puntos
@@ -980,7 +975,7 @@ export default function PlayerPageClient() {
                         (e.currentTarget.style.backgroundColor = "transparent")
                       }
                     >
-                      <td style={{padding: tableCellPadding}}>
+                      <td style={historicCellStyle}>
                         {r.DATE ||
                           r.Date ||
                           r.date ||
@@ -991,7 +986,7 @@ export default function PlayerPageClient() {
                       </td>
                       <td
                         style={{
-                          padding: tableCellPadding,
+                          ...historicCellStyle,
                           fontWeight: "600",
                           color: "rgb(15, 23, 42)",
                         }}
@@ -1006,7 +1001,7 @@ export default function PlayerPageClient() {
                           r.NAME ||
                           "-"}
                       </td>
-                      <td style={{padding: tableCellPadding}}>
+                      <td style={historicCellStyle}>
                         <span
                           style={{
                             backgroundColor: "rgb(165, 243, 252)",
@@ -1017,6 +1012,12 @@ export default function PlayerPageClient() {
                             borderRadius: "9999px",
                             fontSize: isMobile ? "0.72rem" : "0.875rem",
                             fontWeight: "600",
+                            display: "inline-block",
+                            maxWidth: "100%",
+                            whiteSpace: "normal",
+                            wordBreak: "break-word",
+                            overflowWrap: "anywhere",
+                            lineHeight: isMobile ? 1.2 : 1.3,
                           }}
                         >
                           {r.CATEGORY ||
@@ -1028,7 +1029,7 @@ export default function PlayerPageClient() {
                             "-"}
                         </span>
                       </td>
-                      <td style={{padding: tableCellPadding}}>
+                      <td style={historicCellStyle}>
                         {r.COUPLE_NAME ||
                           r.Couple_Name ||
                           r.couple_name ||
@@ -1043,7 +1044,7 @@ export default function PlayerPageClient() {
                       </td>
                       <td
                         style={{
-                          padding: tableCellPadding,
+                          ...historicCellStyle,
                           textAlign: "center",
                           fontWeight: "bold",
                           color: "rgb(234, 88, 12)",
@@ -1059,7 +1060,7 @@ export default function PlayerPageClient() {
                       </td>
                       <td
                         style={{
-                          padding: tableCellPadding,
+                          ...historicCellStyle,
                           textAlign: "center",
                           fontWeight: "bold",
                           color: "rgb(139, 92, 246)",
