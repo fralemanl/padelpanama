@@ -9,7 +9,7 @@ import {
 
 export default function TopPlayersShowcase({players, gender, category}) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -133,6 +133,7 @@ export default function TopPlayersShowcase({players, gender, category}) {
   };
 
   if (topPlayers.length === 0) return null;
+  if (isMobile === null) return <section style={{minHeight: "220px"}} />;
 
   const safeIndex = Number.isInteger(currentIndex) ? currentIndex : 0;
   const player = topPlayers[safeIndex] || topPlayers[0];

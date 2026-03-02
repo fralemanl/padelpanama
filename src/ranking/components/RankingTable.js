@@ -8,7 +8,7 @@ import {
 } from "@/ranking/lib/sheets";
 
 export default function RankingTable({players, allPlayers = [], category}) {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -16,6 +16,10 @@ export default function RankingTable({players, allPlayers = [], category}) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  if (isMobile === null) {
+    return <div style={{minHeight: "220px"}} />;
+  }
 
   const getFoto = (p) => (p?.FOTO || p?.Foto || p?.foto || "").trim();
 
