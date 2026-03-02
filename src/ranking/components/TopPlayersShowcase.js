@@ -20,6 +20,14 @@ export default function TopPlayersShowcase({players, gender, category}) {
 
   const getFoto = (p) => (p?.FOTO || p?.Foto || p?.foto || "").trim();
 
+  const getOptimizedPlayerPhoto = (playerData, size = 360) => {
+    const photoValue = getFoto(playerData);
+    return (
+      buildGoogleDriveThumbnailUrl(photoValue, size) ||
+      buildGoogleDriveImageUrl(photoValue)
+    );
+  };
+
   const sortedPlayers = [...players].sort((a, b) => {
     const pointsA =
       typeof a.POINTS_NUM === "number"
@@ -54,6 +62,19 @@ export default function TopPlayersShowcase({players, gender, category}) {
     }, 4000);
     return () => clearInterval(interval);
   }, [topPlayers.length]);
+
+  useEffect(() => {
+    if (topPlayers.length < 2) return;
+
+    const nextIndex = (currentIndex + 1) % topPlayers.length;
+    const nextPlayer = topPlayers[nextIndex];
+    const nextSrc = getOptimizedPlayerPhoto(nextPlayer, isMobile ? 260 : 420);
+
+    if (nextSrc) {
+      const preloadImage = new Image();
+      preloadImage.src = nextSrc;
+    }
+  }, [currentIndex, topPlayers, isMobile]);
 
   const getMedalEmoji = (index) => {
     if (index === 0) return "🥇";
@@ -116,8 +137,7 @@ export default function TopPlayersShowcase({players, gender, category}) {
   const safeIndex = Number.isInteger(currentIndex) ? currentIndex : 0;
   const player = topPlayers[safeIndex] || topPlayers[0];
   const foto = getFoto(player);
-  const fotoSrc =
-    buildGoogleDriveImageUrl(foto) || buildGoogleDriveThumbnailUrl(foto);
+  const fotoSrc = getOptimizedPlayerPhoto(player, isMobile ? 260 : 420);
   const medal = getMedalEmoji(currentIndex);
   const medalColor = getMedalColor(currentIndex);
   const carouselBackground = getCarouselBackground(currentIndex);
@@ -161,74 +181,78 @@ export default function TopPlayersShowcase({players, gender, category}) {
             gap: isMobile ? "1rem" : "3rem",
           }}
         >
-          {/* Botones de navegación */}
-          <button
-            onClick={() =>
-              setCurrentIndex(
-                (prev) => (prev - 1 + topPlayers.length) % topPlayers.length,
-              )
-            }
-            style={{
-              position: "absolute",
-              left: "1rem",
-              top: "50%",
-              transform: "translateY(-50%)",
-              backgroundColor: medalColor,
-              color: "white",
-              border: "none",
-              borderRadius: "50%",
-              width: isMobile ? "2rem" : "2.5rem",
-              height: isMobile ? "2rem" : "2.5rem",
-              cursor: "pointer",
-              fontSize: isMobile ? "1rem" : "1.25rem",
-              fontWeight: "bold",
-              transition: "all 0.3s ease-in-out",
-              zIndex: 10,
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
-              e.currentTarget.style.boxShadow = `0 8px 16px -2px ${medalColor}`;
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = "translateY(-50%)";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          >
-            ◀
-          </button>
+          {/* Botones de navegación (solo desktop) */}
+          {!isMobile && (
+            <>
+              <button
+                onClick={() =>
+                  setCurrentIndex(
+                    (prev) => (prev - 1 + topPlayers.length) % topPlayers.length,
+                  )
+                }
+                style={{
+                  position: "absolute",
+                  left: "1rem",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  backgroundColor: medalColor,
+                  color: "white",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: "2.5rem",
+                  height: "2.5rem",
+                  cursor: "pointer",
+                  fontSize: "1.25rem",
+                  fontWeight: "bold",
+                  transition: "all 0.3s ease-in-out",
+                  zIndex: 10,
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+                  e.currentTarget.style.boxShadow = `0 8px 16px -2px ${medalColor}`;
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = "translateY(-50%)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                ◀
+              </button>
 
-          <button
-            onClick={() =>
-              setCurrentIndex((prev) => (prev + 1) % topPlayers.length)
-            }
-            style={{
-              position: "absolute",
-              right: "1rem",
-              top: "50%",
-              transform: "translateY(-50%)",
-              backgroundColor: medalColor,
-              color: "white",
-              border: "none",
-              borderRadius: "50%",
-              width: isMobile ? "2rem" : "2.5rem",
-              height: isMobile ? "2rem" : "2.5rem",
-              cursor: "pointer",
-              fontSize: isMobile ? "1rem" : "1.25rem",
-              fontWeight: "bold",
-              transition: "all 0.3s ease-in-out",
-              zIndex: 10,
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
-              e.currentTarget.style.boxShadow = `0 8px 16px -2px ${medalColor}`;
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = "translateY(-50%)";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          >
-            ▶
-          </button>
+              <button
+                onClick={() =>
+                  setCurrentIndex((prev) => (prev + 1) % topPlayers.length)
+                }
+                style={{
+                  position: "absolute",
+                  right: "1rem",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  backgroundColor: medalColor,
+                  color: "white",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: "2.5rem",
+                  height: "2.5rem",
+                  cursor: "pointer",
+                  fontSize: "1.25rem",
+                  fontWeight: "bold",
+                  transition: "all 0.3s ease-in-out",
+                  zIndex: 10,
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
+                  e.currentTarget.style.boxShadow = `0 8px 16px -2px ${medalColor}`;
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = "translateY(-50%)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                ▶
+              </button>
+            </>
+          )}
 
           {/* Contenido del jugador con animación */}
           <Link
@@ -452,6 +476,9 @@ export default function TopPlayersShowcase({players, gender, category}) {
                     <img
                       src={fotoSrc}
                       alt={playerName}
+                      loading="eager"
+                      decoding="async"
+                      fetchPriority="high"
                       style={{
                         width: "100%",
                         height: "100%",
@@ -459,9 +486,9 @@ export default function TopPlayersShowcase({players, gender, category}) {
                       }}
                       referrerPolicy="no-referrer"
                       onError={(e) => {
-                        const thumb = buildGoogleDriveThumbnailUrl(foto);
-                        if (thumb && e.currentTarget.src !== thumb) {
-                          e.currentTarget.src = thumb;
+                        const fullImage = buildGoogleDriveImageUrl(foto);
+                        if (fullImage && e.currentTarget.src !== fullImage) {
+                          e.currentTarget.src = fullImage;
                           return;
                         }
                         e.currentTarget.onerror = null;
