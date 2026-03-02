@@ -524,29 +524,35 @@ export default function PlayerPageClient() {
                     "linear-gradient(135deg, rgb(6, 182, 212), rgb(14, 116, 144))",
                   color: "white",
                   borderRadius: "1rem",
-                  padding: "1.5rem",
+                  padding: isMobile ? "0.9rem" : "1.5rem",
                   boxShadow: "0 10px 20px -5px rgba(6, 182, 212, 0.35)",
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  gap: "1rem",
+                  gap: isMobile ? "0.55rem" : "1rem",
                 }}
               >
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "2.5rem",
+                    gap: isMobile ? "1rem" : "2.5rem",
                   }}
                 >
                   <div>
-                    <p style={{margin: 0, fontSize: "0.9rem", opacity: 0.9}}>
+                    <p
+                      style={{
+                        margin: 0,
+                        fontSize: isMobile ? "0.72rem" : "0.9rem",
+                        opacity: 0.9,
+                      }}
+                    >
                       ELO
                     </p>
                     <p
                       style={{
                         margin: 0,
-                        fontSize: "2.5rem",
+                        fontSize: isMobile ? "1.5rem" : "2.5rem",
                         fontWeight: "700",
                       }}
                     >
@@ -554,13 +560,19 @@ export default function PlayerPageClient() {
                     </p>
                   </div>
                   <div>
-                    <p style={{margin: 0, fontSize: "0.9rem", opacity: 0.9}}>
+                    <p
+                      style={{
+                        margin: 0,
+                        fontSize: isMobile ? "0.72rem" : "0.9rem",
+                        opacity: 0.9,
+                      }}
+                    >
                       Categoria
                     </p>
                     <p
                       style={{
                         margin: 0,
-                        fontSize: "2.5rem",
+                        fontSize: isMobile ? "1.5rem" : "2.5rem",
                         fontWeight: "700",
                       }}
                     >
@@ -573,13 +585,25 @@ export default function PlayerPageClient() {
                     textAlign: "right",
                     backgroundColor: "rgba(255, 255, 255, 0.2)",
                     borderRadius: "0.75rem",
-                    padding: "0.5rem 0.75rem",
+                    padding: isMobile ? "0.4rem 0.55rem" : "0.5rem 0.75rem",
                   }}
                 >
-                  <p style={{margin: 0, fontSize: "0.75rem", opacity: 0.9}}>
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: isMobile ? "0.65rem" : "0.75rem",
+                      opacity: 0.9,
+                    }}
+                  >
                     Ranking Global
                   </p>
-                  <p style={{margin: 0, fontSize: "1.4rem", fontWeight: "700"}}>
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: isMobile ? "1rem" : "1.4rem",
+                      fontWeight: "700",
+                    }}
+                  >
                     #{globalRank}
                   </p>
                 </div>
