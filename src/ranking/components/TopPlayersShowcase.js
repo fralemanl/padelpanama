@@ -9,6 +9,14 @@ import {
 
 export default function TopPlayersShowcase({players, gender, category}) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const getFoto = (p) => (p?.FOTO || p?.Foto || p?.foto || "").trim();
 
@@ -121,10 +129,10 @@ export default function TopPlayersShowcase({players, gender, category}) {
   return (
     <section
       style={{
-        marginBottom: "3rem",
+        marginBottom: isMobile ? "1.5rem" : "3rem",
         animation: "fadeIn 0.6s ease-in-out",
-        width: "80%",
-        margin: "0 auto 3rem auto",
+        width: isMobile ? "96%" : "80%",
+        margin: isMobile ? "0 auto 1.5rem auto" : "0 auto 3rem auto",
       }}
     >
       <div
@@ -137,7 +145,7 @@ export default function TopPlayersShowcase({players, gender, category}) {
         {/* Carrusel */}
         <div
           style={{
-            padding: "2rem",
+            padding: isMobile ? "1rem" : "2rem",
             backgroundColor: "transparent",
             backgroundImage: `url('${carouselBackground}')`,
             backgroundSize: "cover",
@@ -148,9 +156,9 @@ export default function TopPlayersShowcase({players, gender, category}) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            minHeight: "252px",
+            minHeight: isMobile ? "200px" : "252px",
             position: "relative",
-            gap: "3rem",
+            gap: isMobile ? "1rem" : "3rem",
           }}
         >
           {/* Botones de navegación */}
@@ -169,10 +177,10 @@ export default function TopPlayersShowcase({players, gender, category}) {
               color: "white",
               border: "none",
               borderRadius: "50%",
-              width: "2.5rem",
-              height: "2.5rem",
+              width: isMobile ? "2rem" : "2.5rem",
+              height: isMobile ? "2rem" : "2.5rem",
               cursor: "pointer",
-              fontSize: "1.25rem",
+              fontSize: isMobile ? "1rem" : "1.25rem",
               fontWeight: "bold",
               transition: "all 0.3s ease-in-out",
               zIndex: 10,
@@ -202,10 +210,10 @@ export default function TopPlayersShowcase({players, gender, category}) {
               color: "white",
               border: "none",
               borderRadius: "50%",
-              width: "2.5rem",
-              height: "2.5rem",
+              width: isMobile ? "2rem" : "2.5rem",
+              height: isMobile ? "2rem" : "2.5rem",
               cursor: "pointer",
-              fontSize: "1.25rem",
+              fontSize: isMobile ? "1rem" : "1.25rem",
               fontWeight: "bold",
               transition: "all 0.3s ease-in-out",
               zIndex: 10,
@@ -254,13 +262,13 @@ export default function TopPlayersShowcase({players, gender, category}) {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  width: "120px",
-                  height: "120px",
+                  width: isMobile ? "84px" : "120px",
+                  height: isMobile ? "84px" : "120px",
                   borderRadius: "50%",
                   backgroundColor: medalColor,
                   color: "white",
                   fontWeight: "bold",
-                  fontSize: "3rem",
+                  fontSize: isMobile ? "2rem" : "3rem",
                   boxShadow: `0 8px 24px -4px ${medalColor}`,
                   flexShrink: 0,
                 }}
@@ -275,8 +283,8 @@ export default function TopPlayersShowcase({players, gender, category}) {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
-                  gap: "0.75rem",
-                  paddingLeft: "1rem",
+                  gap: isMobile ? "0.5rem" : "0.75rem",
+                  paddingLeft: isMobile ? "0.5rem" : "1rem",
                 }}
               >
                 {/* Nombre */}
@@ -289,7 +297,7 @@ export default function TopPlayersShowcase({players, gender, category}) {
                 >
                   <h3
                     style={{
-                      fontSize: "2.5rem",
+                      fontSize: isMobile ? "1.2rem" : "2.5rem",
                       fontWeight: "300",
                       color: "white",
                       margin: "0",
@@ -309,8 +317,8 @@ export default function TopPlayersShowcase({players, gender, category}) {
                           : "Bandera"
                       }
                       style={{
-                        width: "36px",
-                        height: "20px",
+                        width: isMobile ? "28px" : "36px",
+                        height: isMobile ? "16px" : "20px",
                         objectFit: "cover",
                         borderRadius: "4px",
                         boxShadow: "0 2px 6px rgba(0, 0, 0, 0.35)",
@@ -328,9 +336,9 @@ export default function TopPlayersShowcase({players, gender, category}) {
                     display: "inline-block",
                     backgroundColor: "rgb(165, 243, 252)",
                     color: "rgb(8, 145, 178)",
-                    padding: "0.4rem 0.8rem",
+                    padding: isMobile ? "0.25rem 0.6rem" : "0.4rem 0.8rem",
                     borderRadius: "9999px",
-                    fontSize: "0.85rem",
+                    fontSize: isMobile ? "0.72rem" : "0.85rem",
                     fontWeight: "600",
                     width: "fit-content",
                     textTransform: "uppercase",

@@ -1,5 +1,6 @@
 "use client";
 
+import {useEffect, useState} from "react";
 import Link from "next/link";
 import {
   buildGoogleDriveImageUrl,
@@ -7,6 +8,15 @@ import {
 } from "@/ranking/lib/sheets";
 
 export default function RankingTable({players, allPlayers = [], category}) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const getFoto = (p) => (p?.FOTO || p?.Foto || p?.foto || "").trim();
 
   const normalizeText = (value) =>
@@ -111,9 +121,11 @@ export default function RankingTable({players, allPlayers = [], category}) {
   const tableStyles = {
     wrapper: {
       overflowX: "auto",
+      width: "100%",
     },
     table: {
       width: "100%",
+      minWidth: isMobile ? "920px" : "100%",
       borderCollapse: "collapse",
     },
     thead: {
@@ -123,9 +135,9 @@ export default function RankingTable({players, allPlayers = [], category}) {
       borderBottom: "4px solid rgb(8, 145, 178)",
     },
     th: {
-      padding: "1.5rem 1.5rem",
+      padding: isMobile ? "0.8rem 0.75rem" : "1.5rem 1.5rem",
       textAlign: "left",
-      fontSize: "0.875rem",
+      fontSize: isMobile ? "0.78rem" : "0.875rem",
       fontWeight: "600",
     },
     tbody: {
@@ -139,13 +151,13 @@ export default function RankingTable({players, allPlayers = [], category}) {
       backgroundColor: "rgb(219, 234, 254)",
     },
     td: {
-      padding: "1.5rem 1.5rem",
+      padding: isMobile ? "0.75rem" : "1.5rem 1.5rem",
     },
     rankCell: {
       display: "flex",
       alignItems: "center",
       gap: "0.5rem",
-      fontSize: "1.125rem",
+      fontSize: isMobile ? "0.92rem" : "1.125rem",
       fontWeight: "bold",
     },
     playerCell: {
@@ -166,8 +178,8 @@ export default function RankingTable({players, allPlayers = [], category}) {
       boxShadow: "0 2px 6px rgba(0, 0, 0, 0.2)",
     },
     playerImage: {
-      width: "2.5rem",
-      height: "2.5rem",
+      width: isMobile ? "2rem" : "2.5rem",
+      height: isMobile ? "2rem" : "2.5rem",
       borderRadius: "50%",
       objectFit: "cover",
       border: "2px solid rgb(186, 225, 247)",
@@ -186,15 +198,15 @@ export default function RankingTable({players, allPlayers = [], category}) {
       display: "inline-block",
       backgroundColor: "rgb(165, 243, 252)",
       color: "rgb(8, 145, 178)",
-      fontSize: "0.75rem",
+      fontSize: isMobile ? "0.68rem" : "0.75rem",
       fontWeight: "600",
-      padding: "0.25rem 0.75rem",
+      padding: isMobile ? "0.2rem 0.6rem" : "0.25rem 0.75rem",
       borderRadius: "9999px",
     },
     scoreCell: {
       textAlign: "center",
       fontWeight: "bold",
-      fontSize: "1.125rem",
+      fontSize: isMobile ? "0.95rem" : "1.125rem",
       color: "rgb(15, 23, 42)",
     },
   };
@@ -243,9 +255,9 @@ export default function RankingTable({players, allPlayers = [], category}) {
                     style={{
                       backgroundColor: "rgb(34, 197, 94)",
                       color: "white",
-                      padding: "0.25rem 0.75rem",
+                      padding: isMobile ? "0.2rem 0.6rem" : "0.25rem 0.75rem",
                       borderRadius: "0.5rem",
-                      fontSize: "0.95rem",
+                      fontSize: isMobile ? "0.82rem" : "0.95rem",
                       fontWeight: "bold",
                     }}
                   >
