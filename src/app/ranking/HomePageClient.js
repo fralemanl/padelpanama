@@ -302,7 +302,7 @@ export default function HomePageClient() {
                 alignItems: "center",
                 justifyContent: "center",
                 padding: isMobile ? "0.5rem 0.8rem" : "0.75rem 1.5rem",
-                borderRadius: "999px",
+                borderRadius: "9px",
                 backgroundColor: "white",
                 color: "rgb(15, 23, 42)",
                 fontWeight: "700",
@@ -310,14 +310,14 @@ export default function HomePageClient() {
                 textDecoration: "none",
               }}
             >
-              Calcula tu categoria
+              Category Matchmaker
             </Link>
             <button
               type="button"
               onClick={() => setShowLegend(true)}
               style={{
                 padding: isMobile ? "0.5rem 0.8rem" : "0.75rem 1.5rem",
-                borderRadius: "999px",
+                borderRadius: "9px",
                 backgroundColor: "rgb(30, 41, 59)",
                 color: "white",
                 border: "1px solid rgba(255, 255, 255, 0.2)",
