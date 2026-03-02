@@ -257,7 +257,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
                 width: isMobile ? "14%" : "auto",
               }}
             >
-              {isMobile ? "Cat" : "Cat. / Pos. Cat."}
+              {isMobile ? "#Cat" : "Cat. / Pos. Cat."}
             </th>
             <th
               style={{
@@ -380,15 +380,34 @@ export default function RankingTable({players, allPlayers = [], category}) {
                 </td>
                 <td style={{...tableStyles.td, textAlign: "center"}}>
                   {isMobile ? (
-                    <span
+                    <div
                       style={{
-                        fontSize: "0.68rem",
-                        fontWeight: "700",
-                        color: "rgb(8, 145, 178)",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        lineHeight: 1.1,
+                        gap: "0.08rem",
                       }}
                     >
-                      {player.CATEGORY || "—"}
-                    </span>
+                      <span
+                        style={{
+                          fontSize: "0.66rem",
+                          fontWeight: "700",
+                          color: "rgb(8, 145, 178)",
+                        }}
+                      >
+                        {player.CATEGORY || "—"}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "0.62rem",
+                          fontWeight: "700",
+                          color: "rgb(14, 116, 144)",
+                        }}
+                      >
+                        #{categoryRank}
+                      </span>
+                    </div>
                   ) : (
                     <div
                       style={{

@@ -70,10 +70,12 @@ export default function HomePageClient() {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [viewportReady, setViewportReady] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     handleResize();
+    setViewportReady(true);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -258,7 +260,7 @@ export default function HomePageClient() {
     >
       <div style={{maxWidth: "80rem", margin: "0 auto", padding: "3rem 1rem"}}>
         {/* Top Players Showcase */}
-        {!loading && players.length > 0 && (
+        {viewportReady && !isMobile && !loading && players.length > 0 && (
           <TopPlayersShowcase
             players={visiblePlayers}
             gender={gender}
