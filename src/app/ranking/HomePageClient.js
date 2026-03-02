@@ -286,7 +286,7 @@ export default function HomePageClient() {
               fontWeight: "700",
             }}
           >
-            Calcula tu categoria y consulta los limites ELO
+            Category Matchmaker
           </div>
           <div
             style={{
@@ -310,7 +310,7 @@ export default function HomePageClient() {
                 textDecoration: "none",
               }}
             >
-              Category Matchmaker
+              Calcula tu categoría
             </Link>
             <button
               type="button"
