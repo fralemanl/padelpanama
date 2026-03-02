@@ -217,14 +217,24 @@ export default function RankingTable({players, allPlayers = [], category}) {
         <thead style={tableStyles.thead}>
           <tr>
             <th style={tableStyles.th}>Posición</th>
-            <th style={{...tableStyles.th, textAlign: "center"}}>Nacionalidad</th>
+            {!isMobile && (
+              <th style={{...tableStyles.th, textAlign: "center"}}>
+                Nacionalidad
+              </th>
+            )}
             <th style={tableStyles.th}>Jugador</th>
-            <th style={{...tableStyles.th, textAlign: "center"}}>
-              <div style={{display: "flex", flexDirection: "column", gap: "0.15rem"}}>
-                <span>Categoría/</span>
-                <span style={{fontSize: "0.9rem", opacity: 0.9}}>Posición en Categoría</span>
-              </div>
-            </th>
+            {!isMobile && (
+              <th style={{...tableStyles.th, textAlign: "center"}}>
+                <div
+                  style={{display: "flex", flexDirection: "column", gap: "0.15rem"}}
+                >
+                  <span>Categoría/</span>
+                  <span style={{fontSize: "0.9rem", opacity: 0.9}}>
+                    Posición en Categoría
+                  </span>
+                </div>
+              </th>
+            )}
             <th style={{...tableStyles.th, textAlign: "center"}}>ELO</th>
             <th style={{...tableStyles.th, textAlign: "center"}}>Puntos</th>
           </tr>
@@ -264,26 +274,28 @@ export default function RankingTable({players, allPlayers = [], category}) {
                     #{getGlobalRank(player)}
                   </span>
                 </td>
-                <td style={{...tableStyles.td, textAlign: "center"}}>
-                  <div style={tableStyles.flagCell}>
-                    {flagPath ? (
-                      <img
-                        src={flagPath}
-                        alt={
-                          player.NATIONALITY
-                            ? `Bandera ${player.NATIONALITY}`
-                            : "Bandera"
-                        }
-                        style={tableStyles.flagImage}
-                        onError={(e) => {
-                          e.currentTarget.style.display = "none";
-                        }}
-                      />
-                    ) : (
-                      <span style={{color: "rgb(148, 163, 184)"}}>—</span>
-                    )}
-                  </div>
-                </td>
+                {!isMobile && (
+                  <td style={{...tableStyles.td, textAlign: "center"}}>
+                    <div style={tableStyles.flagCell}>
+                      {flagPath ? (
+                        <img
+                          src={flagPath}
+                          alt={
+                            player.NATIONALITY
+                              ? `Bandera ${player.NATIONALITY}`
+                              : "Bandera"
+                          }
+                          style={tableStyles.flagImage}
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                          }}
+                        />
+                      ) : (
+                        <span style={{color: "rgb(148, 163, 184)"}}>—</span>
+                      )}
+                    </div>
+                  </td>
+                )}
                 <td style={tableStyles.td}>
                   <div style={tableStyles.playerCell}>
                     {fotoSrc && (
@@ -326,23 +338,24 @@ export default function RankingTable({players, allPlayers = [], category}) {
                     </Link>
                   </div>
                 </td>
-                <td style={{...tableStyles.td, textAlign: "center"}}>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "0.25rem"
-                      ,
-                    }}
-                  >
-                    <span style={tableStyles.badge}>
-                      {player.CATEGORY || "—"}
-                    </span>
-                    <span style={tableStyles.badge}>#{categoryRank}</span>
-                    {medal && <span style={{fontSize: "1.1rem"}}>{medal}</span>}
-                  </div>
-                </td>
+                {!isMobile && (
+                  <td style={{...tableStyles.td, textAlign: "center"}}>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "0.25rem",
+                      }}
+                    >
+                      <span style={tableStyles.badge}>
+                        {player.CATEGORY || "—"}
+                      </span>
+                      <span style={tableStyles.badge}>#{categoryRank}</span>
+                      {medal && <span style={{fontSize: "1.1rem"}}>{medal}</span>}
+                    </div>
+                  </td>
+                )}
                 <td style={tableStyles.scoreCell}>
                   {player.ELO_DISPLAY || player.ELO || 0}
                 </td>
