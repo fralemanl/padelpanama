@@ -259,10 +259,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
                     gap: "0.15rem",
                   }}
                 >
-                  <span>Cat. /</span>
-                  <span style={{fontSize: "0.9rem", opacity: 0.9}}>
-                    Pos. Cat.
-                  </span>
+                  <span>Cat. / Pos. Cat.</span>
                 </div>
               </th>
             )}
