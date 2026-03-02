@@ -13,13 +13,18 @@
   overflow: hidden;
   width: 100%;
   margin: 0 auto;
+  display: flex;
 }
 
 .aliados-track {
-  display: flex;
+  display: inline-flex;
+  flex-wrap: nowrap;
   align-items: center;
+  width: auto;
+  min-width: max-content;
   gap: 40px;
   animation: aliados-scroll 35s linear infinite;
+  will-change: transform;
 }
 
 .aliados-logo {
