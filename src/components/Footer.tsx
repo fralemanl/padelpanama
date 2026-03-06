@@ -26,7 +26,7 @@ export default function Footer() {
 
       {/* Bottom */}
       <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-        <p>&copy; UPXG. All rights reserved.</p>
+        <p>&copy; RankingX. All rights reserved.</p>
       </div>
     </footer>
   );
