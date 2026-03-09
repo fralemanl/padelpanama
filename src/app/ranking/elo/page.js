@@ -30,6 +30,24 @@ const parseEloValue = (value) => {
   return Number.isNaN(parsed) ? 0 : parsed;
 };
 
+const CATEGORY_ORDER = ["PRO", "1ra", "2da", "3ra", "4ta", "5ta", "6ta", "7ma"];
+
+const normalizeCategoryLabel = (value) => {
+  const raw = String(value || "")
+    .trim()
+    .toLowerCase();
+  if (!raw) return null;
+  if (raw === "pro") return "PRO";
+  if (raw.startsWith("1")) return "1ra";
+  if (raw.startsWith("2")) return "2da";
+  if (raw.startsWith("3")) return "3ra";
+  if (raw.startsWith("4")) return "4ta";
+  if (raw.startsWith("5")) return "5ta";
+  if (raw.startsWith("6")) return "6ta";
+  if (raw.startsWith("7")) return "7ma";
+  return null;
+};
+
 export default function ComparePage() {
   const [gender, setGender] = useState("masculino");
   const [players, setPlayers] = useState([]);
@@ -184,10 +202,65 @@ export default function ComparePage() {
     return "—";
   };
 
-  const averageCategory = useMemo(
-    () => resolveCategory(averageElo),
-    [averageElo, categoryTable],
+  const capCategoryByBestPlayer = (categoryFromAverage) => {
+    if (!leftPlayer || !rightPlayer) {
+      return {
+        finalCategory: categoryFromAverage,
+        wasApplied: false,
+        bestCategory: null,
+        minAllowedCategory: null,
+      };
+    }
+
+    const leftCategory =
+      normalizeCategoryLabel(leftPlayer.CATEGORY) ||
+      resolveCategory(leftPlayer.ELO);
+    const rightCategory =
+      normalizeCategoryLabel(rightPlayer.CATEGORY) ||
+      resolveCategory(rightPlayer.ELO);
+
+    const leftIndex = CATEGORY_ORDER.indexOf(leftCategory);
+    const rightIndex = CATEGORY_ORDER.indexOf(rightCategory);
+    const averageIndex = CATEGORY_ORDER.indexOf(categoryFromAverage);
+
+    if (leftIndex < 0 || rightIndex < 0 || averageIndex < 0) {
+      return {
+        finalCategory: categoryFromAverage,
+        wasApplied: false,
+        bestCategory: null,
+        minAllowedCategory: null,
+      };
+    }
+
+    // Mejor categoria = indice menor (PRO es 0). Se permite bajar maximo 1 nivel.
+    const bestIndex = Math.min(leftIndex, rightIndex);
+    const minAllowedIndex = Math.min(bestIndex + 1, CATEGORY_ORDER.length - 1);
+    const bestCategory = CATEGORY_ORDER[bestIndex];
+    const minAllowedCategory = CATEGORY_ORDER[minAllowedIndex];
+
+    if (averageIndex > minAllowedIndex) {
+      return {
+        finalCategory: CATEGORY_ORDER[minAllowedIndex],
+        wasApplied: true,
+        bestCategory,
+        minAllowedCategory,
+      };
+    }
+
+    return {
+      finalCategory: categoryFromAverage,
+      wasApplied: false,
+      bestCategory,
+      minAllowedCategory,
+    };
+  };
+
+  const categoryCapInfo = useMemo(
+    () => capCategoryByBestPlayer(resolveCategory(averageElo)),
+    [averageElo, categoryTable, leftPlayer, rightPlayer],
   );
+
+  const averageCategory = categoryCapInfo.finalCategory;
 
   const globalRankMap = useMemo(() => {
     const sorted = [...players].sort((a, b) => (b.ELO || 0) - (a.ELO || 0));
@@ -735,6 +808,23 @@ export default function ComparePage() {
                   CATEGORIA MÍNIMA:{" "}
                   {tableLoading ? "Cargando..." : averageCategory}
                 </div>
+                {!tableLoading && categoryCapInfo.wasApplied && (
+                  <div
+                    style={{
+                      backgroundColor: "#fff7ed",
+                      border: "1px solid #fdba74",
+                      color: "#9a3412",
+                      borderRadius: "0.5rem",
+                      padding: "0.85rem 1rem",
+                      textAlign: "center",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Tope aplicado por mejor categoria: {categoryCapInfo.bestCategory}
+                    . La pareja no puede quedar por debajo de {" "}
+                    {categoryCapInfo.minAllowedCategory}.
+                  </div>
+                )}
               </div>
             )}
           </div>
