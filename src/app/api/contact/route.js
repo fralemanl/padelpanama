@@ -55,8 +55,12 @@ export async function POST(request) {
 
     if (error) {
       console.error("[contact-api] Resend error", error);
+      const detail =
+        (typeof error?.message === "string" && error.message) ||
+        (typeof error?.name === "string" && error.name) ||
+        "Error desconocido de Resend.";
       return NextResponse.json(
-        {error: "No se pudo enviar el mensaje en este momento."},
+        {error: `Resend: ${detail}`},
         {status: 502},
       );
     }
@@ -64,8 +68,11 @@ export async function POST(request) {
     return NextResponse.json({ok: true});
   } catch (error) {
     console.error("[contact-api] Error enviando correo", error);
+    const detail =
+      (typeof error?.message === "string" && error.message) ||
+      "Error interno.";
     return NextResponse.json(
-      {error: "No se pudo enviar el mensaje en este momento."},
+      {error: `No se pudo enviar el mensaje. ${detail}`},
       {status: 500},
     );
   }
