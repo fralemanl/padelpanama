@@ -7,12 +7,20 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request) {
   try {
-    const body = await request.json();
+    const contentType = request.headers.get("content-type") || "";
+    let payload = {};
 
-    const name = String(body?.name || "").trim();
-    const email = String(body?.email || "").trim();
-    const subject = String(body?.subject || "").trim();
-    const message = String(body?.message || "").trim();
+    if (contentType.includes("application/json")) {
+      payload = await request.json();
+    } else {
+      const form = await request.formData();
+      payload = Object.fromEntries(form.entries());
+    }
+
+    const name = String(payload?.name || payload?.username || "").trim();
+    const email = String(payload?.email || "").trim();
+    const subject = String(payload?.subject || payload?.subj || "").trim();
+    const message = String(payload?.message || "").trim();
 
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
