@@ -832,7 +832,7 @@ export default function PlayerPageClient() {
         {/* Características (Radar) */}
         <div
           style={{
-            backgroundColor: "white",
+            backgroundColor: "rgb(125, 211, 252)",
             borderRadius: "1.5rem",
             padding: "2rem",
             boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
@@ -849,7 +849,7 @@ export default function PlayerPageClient() {
               textAlign: "center",
             }}
           >
-            📊 Características
+            📊 Características del jugador
           </h2>
           <PlayerRadar player={player} />
         </div>

@@ -820,9 +820,9 @@ export default function ComparePage() {
                       fontWeight: "600",
                     }}
                   >
-                    Tope aplicado por mejor categoria: {categoryCapInfo.bestCategory}
-                    . La pareja no puede quedar por debajo de {" "}
-                    {categoryCapInfo.minAllowedCategory}.
+                    Tope aplicado por mejor categoria:{" "}
+                    {categoryCapInfo.bestCategory}. La pareja no puede quedar
+                    por debajo de {categoryCapInfo.minAllowedCategory}.
                   </div>
                 )}
               </div>

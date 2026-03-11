@@ -331,7 +331,7 @@
                     id="sc_form_1_form"
                     data-formtype="form_1"
                     method="post"
-                    action="include/sendmail.php"
+                    action="#"
                   >
                     <div class="sc_form_info">
                       <div class="sc_form_item sc_form_field label_over">
@@ -578,6 +578,92 @@
       src="http://maps.google.com/maps/api/js?sensor=false?key="
     ></script>
     <script type="text/javascript" src="js/core.googlemap.min.js"></script>
+
+    <script type="text/javascript">
+      (function () {
+        var form = document.getElementById("sc_form_1_form");
+        if (!form) return;
+
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          var nameInput = document.getElementById("sc_form_username");
+          var emailInput = document.getElementById("sc_form_email");
+          var subjectInput = document.getElementById("sc_form_subj");
+          var messageInput = document.getElementById("sc_form_message");
+          var resultBox = form.querySelector(".result");
+
+          var name = (nameInput && nameInput.value ? nameInput.value : "").trim();
+          var email = (emailInput && emailInput.value ? emailInput.value : "").trim();
+          var subject = (subjectInput && subjectInput.value ? subjectInput.value : "").trim();
+          var message = (messageInput && messageInput.value ? messageInput.value : "").trim();
+
+          if (!name || !email || !subject || !message) {
+            if (resultBox) {
+              resultBox.className = "result sc_infobox sc_infobox_style_error";
+              resultBox.textContent = "Por favor completa todos los campos.";
+            }
+            return;
+          }
+
+          var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+          if (!emailOk) {
+            if (resultBox) {
+              resultBox.className = "result sc_infobox sc_infobox_style_error";
+              resultBox.textContent =
+                "Por favor ingresa un correo electrónico válido.";
+            }
+            return;
+          }
+
+          if (resultBox) {
+            resultBox.className = "result sc_infobox sc_infobox_style_info";
+            resultBox.textContent = "Enviando mensaje...";
+          }
+
+          try {
+            var response = await fetch("/api/contact", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: name,
+                email: email,
+                subject: subject,
+                message: message,
+              }),
+            });
+
+            var responseData = await response.json().catch(function () {
+              return {};
+            });
+
+            if (!response.ok) {
+              throw new Error(
+                responseData.error || "No se pudo enviar el mensaje.",
+              );
+            }
+
+            if (resultBox) {
+              resultBox.className = "result sc_infobox sc_infobox_style_success";
+              resultBox.textContent =
+                "Mensaje enviado correctamente. Gracias por contactarnos.";
+            }
+
+            form.reset();
+          } catch (error) {
+            if (resultBox) {
+              resultBox.className = "result sc_infobox sc_infobox_style_error";
+              resultBox.textContent =
+                error && error.message
+                  ? error.message
+                  : "No se pudo enviar el mensaje en este momento.";
+            }
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
 
