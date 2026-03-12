@@ -829,30 +829,7 @@ export default function PlayerPageClient() {
           </div>
         </div>
 
-        {/* Características (Radar) */}
-        <div
-          style={{
-            backgroundColor: "rgb(125, 211, 252)",
-            borderRadius: "1.5rem",
-            padding: "2rem",
-            boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-            marginBottom: "2rem",
-            animation: "slideUp 0.5s ease-out 0.6s both",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: "bold",
-              color: "rgb(15, 23, 42)",
-              marginBottom: "1.5rem",
-              textAlign: "center",
-            }}
-          >
-            📊 Características del jugador
-          </h2>
-          <PlayerRadar player={player} />
-        </div>
+        {/* Características (Radar) oculto temporalmente */}
 
         {/* Resultados históricos */}
         <div
