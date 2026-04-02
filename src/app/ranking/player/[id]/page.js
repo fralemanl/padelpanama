@@ -244,7 +244,7 @@ export default function PlayerPageClient() {
             a.DATE || a.Date || a.date || a.FECHA || a.Fecha || a.fecha || "";
           const dateB =
             b.DATE || b.Date || b.date || b.FECHA || b.Fecha || b.fecha || "";
-          return new Date(dateA) - new Date(dateB);
+          return new Date(dateB) - new Date(dateA);
         });
 
         setFilteredGames(matches);
