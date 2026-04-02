@@ -46,40 +46,13 @@ export default function RankingTable({players, allPlayers = [], category}) {
     return "";
   };
 
-  const sortedPlayers = [...players].sort((a, b) => {
-    const scoreA = parseFloat(a.ELO) || 0;
-    const scoreB = parseFloat(b.ELO) || 0;
-    const eloDiff = scoreB - scoreA;
-    if (eloDiff !== 0) return eloDiff;
-    const pointsA =
-      typeof a.POINTS_NUM === "number"
-        ? a.POINTS_NUM
-        : parseFloat(a.POINTS) || 0;
-    const pointsB =
-      typeof b.POINTS_NUM === "number"
-        ? b.POINTS_NUM
-        : parseFloat(b.POINTS) || 0;
-    return pointsB - pointsA;
-  });
+  // Respetar el orden que viene del padre (ya filtrado/ordenado)
+  const sortedPlayers = [...players];
 
-  // Calcular el ranking global por ELO y puntos como desempate
+  // Ranking global: usar el mismo orden que viene del padre
   const globalSortedPlayers = [
     ...(allPlayers.length > 0 ? allPlayers : players),
-  ].sort((a, b) => {
-    const scoreA = parseFloat(a.ELO) || 0;
-    const scoreB = parseFloat(b.ELO) || 0;
-    const eloDiff = scoreB - scoreA;
-    if (eloDiff !== 0) return eloDiff;
-    const pointsA =
-      typeof a.POINTS_NUM === "number"
-        ? a.POINTS_NUM
-        : parseFloat(a.POINTS) || 0;
-    const pointsB =
-      typeof b.POINTS_NUM === "number"
-        ? b.POINTS_NUM
-        : parseFloat(b.POINTS) || 0;
-    return pointsB - pointsA;
-  });
+  ];
 
   const getGlobalRank = (player) => {
     return (
@@ -94,23 +67,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
     return acc;
   }, {});
 
-  Object.keys(categoryRankMap).forEach((key) => {
-    categoryRankMap[key].sort((a, b) => {
-      const scoreA = parseFloat(a.ELO) || 0;
-      const scoreB = parseFloat(b.ELO) || 0;
-      const eloDiff = scoreB - scoreA;
-      if (eloDiff !== 0) return eloDiff;
-      const pointsA =
-        typeof a.POINTS_NUM === "number"
-          ? a.POINTS_NUM
-          : parseFloat(a.POINTS) || 0;
-      const pointsB =
-        typeof b.POINTS_NUM === "number"
-          ? b.POINTS_NUM
-          : parseFloat(b.POINTS) || 0;
-      return pointsB - pointsA;
-    });
-  });
+  // El ranking por categoría también respeta el orden del padre
 
   const getCategoryRank = (player) => {
     const key = (player.CATEGORY || "").trim() || "—";

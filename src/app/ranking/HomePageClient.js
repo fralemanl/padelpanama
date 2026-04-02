@@ -62,7 +62,7 @@ export default function HomePageClient() {
   const [gender, setGender] = useState("masculino");
   const [category, setCategory] = useState("all");
   const [nationality, setNationality] = useState("all");
-  const [sortBy, setSortBy] = useState("points");
+  const [sortBy, setSortBy] = useState("elo");
   const [searchTerm, setSearchTerm] = useState("");
   const [showLegend, setShowLegend] = useState(false);
   const initializedRef = useRef(false);
@@ -92,7 +92,7 @@ export default function HomePageClient() {
     let nextGender = paramGender || "masculino";
     let nextCategory = paramCategory || "all";
     let nextNationality = paramNationality || "all";
-    let nextSortBy = paramSortBy || "points";
+    let nextSortBy = paramSortBy || "elo";
     let nextSearchTerm = "";
 
     if (!paramGender || !paramCategory || !paramNationality || !paramSortBy) {

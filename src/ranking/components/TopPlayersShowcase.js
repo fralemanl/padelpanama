@@ -28,23 +28,8 @@ export default function TopPlayersShowcase({players, gender, category}) {
     );
   };
 
-  const sortedPlayers = [...players].sort((a, b) => {
-    const pointsA =
-      typeof a.POINTS_NUM === "number"
-        ? a.POINTS_NUM
-        : parseFloat(a.POINTS) || 0;
-    const pointsB =
-      typeof b.POINTS_NUM === "number"
-        ? b.POINTS_NUM
-        : parseFloat(b.POINTS) || 0;
-    const pointsDiff = pointsB - pointsA;
-    if (pointsDiff !== 0) return pointsDiff;
-    const scoreA = parseFloat(a.ELO) || 0;
-    const scoreB = parseFloat(b.ELO) || 0;
-    return scoreB - scoreA;
-  });
-
-  const topPlayers = sortedPlayers.slice(0, 10);
+  // Usar el orden que viene del padre (ya filtrado/ordenado)
+  const topPlayers = players.slice(0, 10);
 
   // Auto-rotate cada 4 segundos
   useEffect(() => {
