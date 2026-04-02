@@ -47,6 +47,10 @@ export default function RankingTable({players, allPlayers = [], category}) {
   };
 
   const sortedPlayers = [...players].sort((a, b) => {
+    const scoreA = parseFloat(a.ELO) || 0;
+    const scoreB = parseFloat(b.ELO) || 0;
+    const eloDiff = scoreB - scoreA;
+    if (eloDiff !== 0) return eloDiff;
     const pointsA =
       typeof a.POINTS_NUM === "number"
         ? a.POINTS_NUM
@@ -55,17 +59,17 @@ export default function RankingTable({players, allPlayers = [], category}) {
       typeof b.POINTS_NUM === "number"
         ? b.POINTS_NUM
         : parseFloat(b.POINTS) || 0;
-    const pointsDiff = pointsB - pointsA;
-    if (pointsDiff !== 0) return pointsDiff;
-    const scoreA = parseFloat(a.ELO) || 0;
-    const scoreB = parseFloat(b.ELO) || 0;
-    return scoreB - scoreA;
+    return pointsB - pointsA;
   });
 
-  // Calcular el ranking global por puntos y ELO
+  // Calcular el ranking global por ELO y puntos como desempate
   const globalSortedPlayers = [
     ...(allPlayers.length > 0 ? allPlayers : players),
   ].sort((a, b) => {
+    const scoreA = parseFloat(a.ELO) || 0;
+    const scoreB = parseFloat(b.ELO) || 0;
+    const eloDiff = scoreB - scoreA;
+    if (eloDiff !== 0) return eloDiff;
     const pointsA =
       typeof a.POINTS_NUM === "number"
         ? a.POINTS_NUM
@@ -74,11 +78,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
       typeof b.POINTS_NUM === "number"
         ? b.POINTS_NUM
         : parseFloat(b.POINTS) || 0;
-    const pointsDiff = pointsB - pointsA;
-    if (pointsDiff !== 0) return pointsDiff;
-    const scoreA = parseFloat(a.ELO) || 0;
-    const scoreB = parseFloat(b.ELO) || 0;
-    return scoreB - scoreA;
+    return pointsB - pointsA;
   });
 
   const getGlobalRank = (player) => {
@@ -96,6 +96,10 @@ export default function RankingTable({players, allPlayers = [], category}) {
 
   Object.keys(categoryRankMap).forEach((key) => {
     categoryRankMap[key].sort((a, b) => {
+      const scoreA = parseFloat(a.ELO) || 0;
+      const scoreB = parseFloat(b.ELO) || 0;
+      const eloDiff = scoreB - scoreA;
+      if (eloDiff !== 0) return eloDiff;
       const pointsA =
         typeof a.POINTS_NUM === "number"
           ? a.POINTS_NUM
@@ -104,11 +108,7 @@ export default function RankingTable({players, allPlayers = [], category}) {
         typeof b.POINTS_NUM === "number"
           ? b.POINTS_NUM
           : parseFloat(b.POINTS) || 0;
-      const pointsDiff = pointsB - pointsA;
-      if (pointsDiff !== 0) return pointsDiff;
-      const scoreA = parseFloat(a.ELO) || 0;
-      const scoreB = parseFloat(b.ELO) || 0;
-      return scoreB - scoreA;
+      return pointsB - pointsA;
     });
   });
 
