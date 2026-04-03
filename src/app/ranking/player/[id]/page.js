@@ -226,18 +226,37 @@ export default function PlayerPageClient() {
             player.nombre,
           ].filter(Boolean)[0] || "";
 
-        const matches = (rows || []).filter((row) => {
-          const playerNameColumn = (
+        const nameLower = playerName.toLowerCase();
+        const matches = (rows || []).reduce((acc, row) => {
+          const playerCol = (
             row.PLAYER_NAME ||
             row.Player_Name ||
             row.player_name ||
             ""
           ).trim();
-          return (
-            playerNameColumn &&
-            playerNameColumn.toLowerCase() === playerName.toLowerCase()
-          );
-        });
+          const coupleCol = (
+            row.COUPLE_NAME ||
+            row.Couple_Name ||
+            row.couple_name ||
+            row.PARTNER ||
+            row.Partner ||
+            row.partner ||
+            row.PAREJA ||
+            row.Pareja ||
+            row.pareja ||
+            row.PARTNER_NAME ||
+            ""
+          ).trim();
+
+          if (playerCol && playerCol.toLowerCase() === nameLower) {
+            // Aparece como jugador principal — se agrega tal cual
+            acc.push(row);
+          } else if (coupleCol && coupleCol.toLowerCase() === nameLower) {
+            // Aparece como pareja — intercambiar jugador y pareja
+            acc.push({...row, _swapped: true});
+          }
+          return acc;
+        }, []);
 
         matches.sort((a, b) => {
           const dateA =
@@ -900,8 +919,9 @@ export default function PlayerPageClient() {
                   r.Categoria ||
                   r.categoria ||
                   "-";
-                const eventCouple =
-                  r.COUPLE_NAME ||
+                const eventCouple = r._swapped
+                  ? (r.PLAYER_NAME || r.Player_Name || r.player_name || "-")
+                  : (r.COUPLE_NAME ||
                   r.Couple_Name ||
                   r.couple_name ||
                   r.PARTNER ||
@@ -911,7 +931,7 @@ export default function PlayerPageClient() {
                   r.Pareja ||
                   r.pareja ||
                   r.PARTNER_NAME ||
-                  "-";
+                  "-");
                 const eventPosition =
                   r.POSITION ||
                   r.Position ||
@@ -1237,8 +1257,9 @@ export default function PlayerPageClient() {
                       r.Categoria ||
                       r.categoria ||
                       "-";
-                    const eventCouple =
-                      r.COUPLE_NAME ||
+                    const eventCouple = r._swapped
+                      ? (r.PLAYER_NAME || r.Player_Name || r.player_name || "-")
+                      : (r.COUPLE_NAME ||
                       r.Couple_Name ||
                       r.couple_name ||
                       r.PARTNER ||
@@ -1248,7 +1269,7 @@ export default function PlayerPageClient() {
                       r.Pareja ||
                       r.pareja ||
                       r.PARTNER_NAME ||
-                      "-";
+                      "-");
                     const eventPosition =
                       r.POSITION ||
                       r.Position ||
