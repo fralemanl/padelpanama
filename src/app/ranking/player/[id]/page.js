@@ -928,6 +928,12 @@ export default function PlayerPageClient() {
                   r.Puntos ||
                   r.puntos ||
                   "-";
+                const eventEloDiff =
+                  r["+/- ELO"] ||
+                  r.ELO_DIFF ||
+                  r.Elo_Diff ||
+                  r.elo_diff ||
+                  "-";
 
                 return (
                   <article
@@ -1020,7 +1026,7 @@ export default function PlayerPageClient() {
                     <div
                       style={{
                         display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
+                        gridTemplateColumns: "1fr 1fr 1fr",
                         gap: "0.5rem",
                       }}
                     >
@@ -1083,6 +1089,36 @@ export default function PlayerPageClient() {
                           }}
                         >
                           +{eventPoints}
+                        </p>
+                      </div>
+                      <div
+                        style={{
+                          backgroundColor: String(eventEloDiff).startsWith("-") ? "rgb(254, 242, 242)" : "rgb(240, 253, 244)",
+                          border: `1px solid ${String(eventEloDiff).startsWith("-") ? "rgb(254, 202, 202)" : "rgb(187, 247, 208)"}`,
+                          borderRadius: "0.8rem",
+                          padding: "0.45rem 0.5rem",
+                          textAlign: "center",
+                        }}
+                      >
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: "0.64rem",
+                            color: String(eventEloDiff).startsWith("-") ? "rgb(153, 27, 27)" : "rgb(22, 101, 52)",
+                            fontWeight: "700",
+                          }}
+                        >
+                          📈 +/- ELO
+                        </p>
+                        <p
+                          style={{
+                            margin: 0,
+                            fontSize: "0.9rem",
+                            color: String(eventEloDiff).startsWith("-") ? "rgb(220, 38, 38)" : "rgb(22, 163, 74)",
+                            fontWeight: "800",
+                          }}
+                        >
+                          {eventEloDiff !== "-" && !String(eventEloDiff).startsWith("-") ? "+" : ""}{eventEloDiff}
                         </p>
                       </div>
                     </div>
@@ -1162,6 +1198,15 @@ export default function PlayerPageClient() {
                     >
                       ⭐ Puntos
                     </th>
+                    <th
+                      style={{
+                        padding: "0.8rem",
+                        textAlign: "center",
+                        fontWeight: "600",
+                      }}
+                    >
+                      📈 +/- ELO
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1219,6 +1264,12 @@ export default function PlayerPageClient() {
                       r.PUNTOS ||
                       r.Puntos ||
                       r.puntos ||
+                      "-";
+                    const eventEloDiff =
+                      r["+/- ELO"] ||
+                      r.ELO_DIFF ||
+                      r.Elo_Diff ||
+                      r.elo_diff ||
                       "-";
 
                     return (
@@ -1283,6 +1334,16 @@ export default function PlayerPageClient() {
                           }}
                         >
                           +{eventPoints}
+                        </td>
+                        <td
+                          style={{
+                            padding: "0.75rem 0.8rem",
+                            textAlign: "center",
+                            fontWeight: "700",
+                            color: String(eventEloDiff).startsWith("-") ? "rgb(220, 38, 38)" : "rgb(22, 163, 74)",
+                          }}
+                        >
+                          {eventEloDiff !== "-" && !String(eventEloDiff).startsWith("-") ? "+" : ""}{eventEloDiff}
                         </td>
                       </tr>
                     );
